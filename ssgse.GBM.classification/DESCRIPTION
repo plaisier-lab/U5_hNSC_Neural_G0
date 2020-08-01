@@ -1,0 +1,11 @@
+Package: ssgsea.GBM.classification
+Type: Package
+Title: What the package does (short line)
+Version: 1.0
+Date: 2016-04-15
+Author: Qianghu Wang
+Maintainer: Who to complain to <qwang5@mdanderson.org>
+Description: More about what it does (maybe more than one line)
+License: What license is it under?
+NeedsCompilation: no
+Packaged: 2016-04-15 12:34:17 UTC; QhW
