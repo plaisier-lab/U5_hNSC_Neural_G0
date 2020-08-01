@@ -67,11 +67,40 @@ Here is what the fila directory structure should look like:
             +-- p_result_GSE89567.gct.txt
             +-- res_All_GSE131928.csv
         +-- U5_hNSC
-            +-- 
+            +-- sgTAOK1
+                +-- filtered_gene_bc_matrices
+                    +-- hg19
+                        +-- barcodes.tsv
+                        +-- genes.tsv
+                        +-- matrix.mtx
+            +-- WT
+                +-- filtered_gene_bc_matrices
+                    +-- hg19
+                        +-- barcodes.tsv
+                        +-- genes.tsv
+                        +-- matrix.mtx
+            +-- WT_CDTplus
+                +-- filtered_gene_bc_matrices
+                    +-- hg19
+                        +-- barcodes.tsv
+                        +-- genes.tsv
+                        +-- matrix.mtx
         +-- Whitfield
+            +-- data
+                +-- whitfield_dataPlusScores_6_30_2020_SHAKE.T_1334.csv
+                +-- whitfield_dataPlusScores_6_30_2020_SHAKE_1334.csv
+                +-- whitfield_dataPlusScores_6_30_2020_TN.T_1334.csv
+                +-- whitfield_dataPlusScores_6_30_2020_TN_1334.csv
+                +-- whitfield_dataPlusScores_6_30_2020_TT1.T_1334.csv
+                +-- whitfield_dataPlusScores_6_30_2020_TT1_1334.csv
+                +-- whitfield_dataPlusScores_6_30_2020_TT2.T_1334.csv
+                +-- whitfield_dataPlusScores_6_30_2020_TT2_1334.csv
+                +-- whitfield_dataPlusScores_6_30_2020_TT3.T_1334.csv
+                +-- whitfield_dataPlusScores_6_30_2020_TT3_1334.csv
+            +-- markergenes_ForPlotting.csv
+            +-- metaInformation.csv
     +-- LICENSE
     +-- makeDatasetsForClassification.R
-    +-- makeDatasetsForClassification.R~
     +-- plotNowakowski.py
     +-- plottingClassifiers.py
     +-- README.md
