@@ -15,7 +15,8 @@ In order to run the software and scripts you will need to setup a specific direc
 3. Download (and unzip for zip files) all files from [figshare](https://figshare.com/projects/Neural_G0_a_quiescent-like_state_found_in_neuroepithelial-derived_cells_and_glioma/86939)
 
 Here is what the fila directory structure should look like:
-'''
+
+```
 .
 +-- U5_hNSC_Neural_G0
     +-- actinn.py
@@ -80,7 +81,7 @@ Here is what the fila directory structure should look like:
     +-- ssgse.GBM.classification
     +-- U5_hNSC_scRNA_seq_Analysis.R
     +-- Whitfield_classification_ACTINN_analysis.py
-'''
+```
 
 #### Description of datafiles
 
