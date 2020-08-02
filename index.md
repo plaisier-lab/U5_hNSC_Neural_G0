@@ -192,10 +192,10 @@ Using scRNA-seq we profiled 5,973 actively dividing U5-hNSCs (Bressan et al, 201
 root@ef02b3a45938:/files/U5_hNSC_Neural_G0# Rscript U5_hNSC_scRNA_seq_Analysis.R
 ```
 This script will output:
-- tsne_cell_embeddings_Perplexity_26.csv - TSNE embeddings for use in later plots.
-- results/eightClusters_WT_sgTAOK1.csv - marker genes that discriminate between U5 hNSC cell cycle clusters.
-- results/TSNE_perplexity_26.pdf - TSNE plot for U5 hNSC WT.
-- results/cellCycleNetwork.pdf - network that shows how each cell cycle cluster connects to the other clusters.
+- **tsne_cell_embeddings_Perplexity_26.csv** - TSNE embeddings for use in later plots.
+- **results/eightClusters_WT_sgTAOK1.csv** - marker genes that discriminate between U5 hNSC cell cycle clusters.
+- **results/TSNE_perplexity_26.pdf** - TSNE plot for U5 hNSC WT.
+- **results/cellCycleNetwork.pdf** - network that shows how each cell cycle cluster connects to the other clusters.
 - Three hypergeometric p-values for overlaps with YAP target genes which are printed out to the console.
 
 #### 2. Resolving the flow of cells through the cell cycle using RNA velocity 
@@ -204,14 +204,14 @@ We added directionality to the edges using RNA velocity which computes the ratio
 root@ef02b3a45938:/files/U5_hNSC_Neural_G0# velocyto run10x -m hg19_rmsk.gtf WT genes.gtf
 ```
 This analysis will output:
- - U5_velocyto.loom - a loom file with the matrix of spliced and unspliced reads for each gene.
+ - **U5_velocyto.loom** - a loom file with the matrix of spliced and unspliced reads for each gene.
  
 Then, we use scvelo to take in the unsplied and spliced transcript counts and compute the RNA velocities and stream lines.
 ```console
 root@ef02b3a45938:/files/U5_hNSC_Neural_G0# python3 scvelo_analysis.py
 ```
 This script will output:
-- ccAdata_velocity_stream_tsne.png - tSNE embeddings with RNA velocity stream lines.
+- **ccAdata_velocity_stream_tsne.png** - tSNE embeddings with RNA velocity stream lines.
 
 #### 3. Pepare data for building classifier
 We faciliatate further analysis in Python by converting the 
