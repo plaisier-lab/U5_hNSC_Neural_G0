@@ -10,13 +10,14 @@
 - **[Docker container](#docker-container)**
 - **[Aanalyses](#Analyses)**
     1. **[Identification of cell cycle phases](#1-identification-of-cell-cycle-phases)**
-    2. **[Pepare data for building classifier](#2-pepare-data-for-building-classifier)**
-    3. **[Build classifier: 100-fold cross-validation](#3-build-classifier-100-fold-cross-validation)**
-    4. **[Sensitivity analysis](#4-sensitivity-analysis)**
-    5. **[Whitfield et al., 2002 gold-standard classification](#5-whitfield-et-al-2002-gold-standard-classification)**
-    6. **[Classify human scRNA-seq datasets](#6-classify-human-scRNA-seq-datasets)**
-    7. **[Classify mouse scRNA-seq datasets](#7-classify-mouse-scRNA-seq-datasets)**
-    8. **[Classify glioma scRNA-seq datasets](#8-classify-glioma-scRNA-seq-datasets)**
+    2. **[Resolving the flow of cells through the cell cycle using RNA velocity](2-resolving-the-flow-of-cells-through-the-cell-cycle-using-rna-velocity)
+    3. **[Pepare data for building classifier](#3-pepare-data-for-building-classifier)**
+    4. **[Build classifier: 100-fold cross-validation](#4-build-classifier-100-fold-cross-validation)**
+    5. **[Sensitivity analysis](#5-sensitivity-analysis)**
+    6. **[Whitfield et al., 2002 gold-standard classification](#6-whitfield-et-al-2002-gold-standard-classification)**
+    7. **[Classify human scRNA-seq datasets](#7-classify-human-scRNA-seq-datasets)**
+    8. **[Classify mouse scRNA-seq datasets](#8-classify-mouse-scRNA-seq-datasets)**
+    9. **[Classify glioma scRNA-seq datasets](#9-classify-glioma-scRNA-seq-datasets)**
 - **[Contact](#contact)**
 - **[Citation](#citation)**
 
@@ -179,47 +180,51 @@ If you are able to change to the 'U5_hNSC_Neual_G0 directory' you should be read
 The order of analyses in this study and the details of each analysis are described below:
 
 #### 1. Identification of cell cycle phases
----
-**NOTE:** This code requires an extra installation step to revert the R package Seurat to V2.3.4. To install Seurat V2.3.4 please run the following command:
-```console
-root@ef02b3a45938:/files/U5_hNSC_Neural_G0# R
-> source("https://z.umn.edu/archived-seurat")
-```
-Once this portion of the analysis is completed please close the Docker instance by typing 'exit' into the console until you return to your base operating system. Then restart the Docker instance as described above.
----
+> **NOTE!** This code requires an extra installation step to revert the R package Seurat to V2.3.4. To install Seurat V2.3.4 please run the following command:
+> ```console
+> root@ef02b3a45938:/files/U5_hNSC_Neural_G0# R
+> > source("https://z.umn.edu/archived-seurat")
+> ```
+> Once this portion of the analysis is completed please close the Docker instance by typing 'exit' into the console until you return to your base operating system. Then restart the Docker instance as described above.
+
 Using scRNA-seq we profiled 5,973 actively dividing U5-hNSCs (Bressan et al, 2017) to identify the single-cell gene expression states corresponding to cell cycle phases with a focus on G0/G1 subpopulations. This will take in the scRNA-seq data from the 'data/U5_hNSC' directory where the 10X cellranger outputs for the U5 hNSCs are stored.
 ```console
 root@ef02b3a45938:/files/U5_hNSC_Neural_G0# Rscript U5_hNSC_scRNA_seq_Analysis.R
 ```
 This script will output:
-- tsne_cell_embeddings_Perplexity_26.csv
-- results/eightClusters_WT_sgTAOK1.csv
-- results/TSNE_perplexity_26.pdf
-- results/cellCycleNetwork.pdf
+- tsne_cell_embeddings_Perplexity_26.csv - TSNE embeddings for use in later plots.
+- results/eightClusters_WT_sgTAOK1.csv - marker genes that discriminate between U5 hNSC cell cycle clusters.
+- results/TSNE_perplexity_26.pdf - TSNE plot for U5 hNSC WT.
+- results/cellCycleNetwork.pdf - network that shows how each cell cycle cluster connects to the other clusters.
+- Three hypergeometric p-values for overlaps with YAP target genes which are printed out to the console.
 
-#### 2. Pepare data for building classifier
+#### 2. Resolving the flow of cells through the cell cycle using RNA velocity 
+**TODO** scVelo etc.
+
+#### 3. Pepare data for building classifier
+We faciliatate further analysis in Python by converting the 
 converting_to_loom.R
 
-#### 3. Build classifier: 100-fold cross-validation
+#### 4. Build classifier: 100-fold cross-validation
 cvClassification_FullAnalysis.py
 calculatingErrors_CV.py
 plottingClassifiers.py
 
-#### 4. Sensitivity analysis
+#### 5. Sensitivity analysis
 sensitivityAnalysis_run.py
 sensitivityAnalysis_plot.py
 
-#### 5. Whitfield et al., 2002 gold-standard classification
+#### 6. Whitfield et al., 2002 gold-standard classification
 Whitfield_classification_ACTINN_analysis.py
 
-#### 6. Classify human scRNA-seq datasets
+#### 7. Classify human scRNA-seq datasets
 classifyPrimaryCells_homoSapiens.py
 plotNowakowski.py
 
-#### 7. Classify mouse scRNA-seq datasets
+#### 8. Classify mouse scRNA-seq datasets
 classifyPrimaryCells_musMusculus.py
 
-#### 8. Classify glioma scRNA-seq datasets
+#### 9. Classify glioma scRNA-seq datasets
 classifyPrimaryCells_gliomas.py
 
 ### Contact
