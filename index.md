@@ -272,7 +272,7 @@ This script will output:
 We classified three human scRNA-seq studies:
 1. [Noakowski et al., 2017](https://pubmed.ncbi.nlm.nih.gov/29217575/) - allowed us to investigate how Neural G0 might arise during mammalian development by applying the ccAF to data from the developing human telencephalon.
 2. [HEK293T](https://support.10xgenomics.com/single-cell-gene-expression/datasets/3.0.2/5k_hgmm_v3_nextgem) - 3,468 HEK293T cells from a barnyard assay conducted by 10X.
-3. [Puram et al., 2017](head and neck squamous cell carcinoma (HNSCC) tumors) - scRNA-seq from head and neck squamous cell carcinoma (HNSCC) tumors (GSE103322).
+3. [Puram et al., 2017](https://pubmed.ncbi.nlm.nih.gov/29198524/) - scRNA-seq from head and neck squamous cell carcinoma (HNSCC) tumors (GSE103322).
 ```console
 root@ef02b3a45938:/files/U5_hNSC_Neural_G0# python3 classifyPrimaryCells_homoSapiens.py
 ```
