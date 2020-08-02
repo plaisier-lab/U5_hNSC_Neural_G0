@@ -225,7 +225,7 @@ This script will output:
 #### 4. Build classifier: 100-fold cross-validation
 We used the hNSC scRNA-seq data to build a cell cycle classifier. We tested four different methods which were previously found to be [useful for building classifiers from scRNA-seq profiles](https://pubmed.ncbi.nlm.nih.gov/31500660): 
 > 1. [Support Vector Machine with rejection (SVMrej)](https://scikit-learn.org/stable/modules/svm.html)
-> 2. [Random Forest (RF)]
+> 2. [Random Forest (RF)](https://scikit-learn.org/stable/modules/generated/sklearn.ensemble.RandomForestClassifier.html)
 > 3. scRNA-seq optimized [K-Nearest Neighbors (KNN)](https://pubmed.ncbi.nlm.nih.gov/29409532)
 > 4. scRNA-seq optimized [ACTINN Neural Network (NN) method](https://pubmed.ncbi.nlm.nih.gov/31359028).
 We selected the 1,536 most highly variable genes in the U5-hNSC scRNA-seq profiles as the training dataset for the classifier. We then used 100-fold cross-validation (CV) to determine the best method:
@@ -253,19 +253,13 @@ This script will output:
 - **results/CV_plots/F1_scores_for_each_state_per_classifier_1536_2.pdf** - A boxplot of each cell cycle state stratified by classifier method.
 
 #### 5. Sensitivity analysis
-[SAM FILL THIS IN]
+A major issue in scRNA-seq studies is that the number of genes detected is heavily dependent upon sequencing depth, and missing gene information is a commonplace in scRNA-seq studies. Therefore we conducted a sensitivity analysis to determine the effect of randomly removing an increasing percentage of genes.
 ```console
-root@ef02b3a45938:/files/U5_hNSC_Neural_G0# python3 sensitivityAnalysis_run.py
+root@ef02b3a45938:/files/U5_hNSC_Neural_G0# python3 sensitivityAnalysis.py
 ```
 This script will output:
-- **results/???** - ???.
-
-[SAM FILL THIS IN]
-```console
-root@ef02b3a45938:/files/U5_hNSC_Neural_G0# python3 sensitivityAnalysis_plot.py
-```
-This script will output:
-- **results/???** - ???.
+- **results/SensitivityAnalysis/ccAF_CV_sensitivity_analysis.csv** - The true labels, and predicted labels for the test sets from each cross-valdiation iteration.
+- **results/SensitivityAnalysis/ccAF_CV_sensitivity_analysis_boxplot.pdf** - Boxplot showing how increasing amounts of missing genes affects the error rate of the ccAF classifier.
 
 #### 6. Whitfield et al., 2002 gold-standard classification
 [SAM FILL THIS IN]
