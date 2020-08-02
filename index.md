@@ -7,7 +7,7 @@
 - **[Data and code availability](#data-and-code-availability)**
 - **[Instructions to setup data and code for recreating analyses](#instructions-to-setup-data-and-code-for-recreating-analyses)**
 - **[Directory structure](#directory-structure)**
-- **[Order of operations](#order-of-operation)**
+- **[Order of operations](#order-of-operations)**
 - **[Contact](#contact)**
 - **[Citation](#citation)**
 
@@ -132,7 +132,17 @@ After downloading and unzipping the files the directory structure should look li
 
 The results directory will hold the output from analysis scripts.
 
+### Docker container
+We facilitate the use of our code and data by providing a Docker Hub container [cplaisier/scrna_seq_velocity](https://hub.docker.com/r/cplaisier/scrna_seq_velocity) which has all the dependencies and libraries to run the scripts. Please install Docker and then from the command line run:
+
+```shell
+docker pull cplaisier/scrna_seq_velocity
+```
+
 ### Order of operations
+The order of analyses in this study and the details of each analysis are described below:
+
+#### 1. Identification of cell cycle phases and candidate G0/G1 subpopulations in human NSCs
 
 
 ### Contact
