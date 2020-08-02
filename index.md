@@ -287,29 +287,31 @@ This script will output two files for each study:
 - **results/results/Nowakowski_ccAF_plot_Refined.pdf** - a stacked barplot that shows how the cells form each cell type in Nowakowski et al., 2017 are classified by ccAF.
 
 #### 8. Classify mouse scRNA-seq datasets
-We classified three human scRNA-seq studies:
-    1. [Noakowski et al., 2017](https://pubmed.ncbi.nlm.nih.gov/29217575/) - allowed us to investigate how Neural G0 might arise during mammalian development by applying the ccAF to data from the developing human telencephalon.
-    2. [HEK293T](https://support.10xgenomics.com/single-cell-gene-expression/datasets/3.0.2/5k_hgmm_v3_nextgem) - 3,468 HEK293T cells from a barnyard assay conducted by 10X.
-    3. [Puram et al., 2017](head and neck squamous cell carcinoma (HNSCC) tumors) - scRNA-seq from head and neck squamous cell carcinoma (HNSCC) tumors (GSE103322).
+We classified three mouse scRNA-seq studies:
+    1. [Llorens-Bobadilla et al., 2015](https://www.ncbi.nlm.nih.gov/pubmed/26235341) - defined quiescent neural stem cell (qNSC) and active (aNSC) subpopulations from adult mouse subbentricular zone (GSE67833).
+    2. [Dulken et al., 2017](https://www.ncbi.nlm.nih.gov/pubmed/28099854) - perform single cell transcriptomics on neural stem cells (NSCs) from adult mice (PRJNA324289).
 ```console
 root@ef02b3a45938:/files/U5_hNSC_Neural_G0# python3 classifyPrimaryCells_musMusculus.py
 ```
 This script will output two files for each study:
-- **results/ccAF_results_\*.csv** - a table where the cells are rows and the columns are meta-information about the cells and 'Predictions', which are the predicted ccAF labels. The asterisk will be replaced with the name of the study:  Nowakowski_norm, HECK293T, and GSE103322.
-- **results/table1_\*.csv** - a confusion matrix of counts for each study. The asterisk will be replaced with the name of the study:  Nowakowski_norm, HECK293T, and GSE103322.
+- **results/ccAF_results_\*.csv** - a table where the cells are rows and the columns are meta-information about the cells and 'Predictions', which are the predicted ccAF labels. The asterisk will be replaced with the name of the study:  GSE67833 and PRJNA324289.
+- **results/table1_\*.csv** - a confusion matrix of counts for each study. The asterisk will be replaced with the name of the study:  GSE67833 and PRJNA324289.
 
 #### 9. Classify glioma scRNA-seq datasets
-We classified three human scRNA-seq studies:
-    1. [Noakowski et al., 2017](https://pubmed.ncbi.nlm.nih.gov/29217575/) - allowed us to investigate how Neural G0 might arise during mammalian development by applying the ccAF to data from the developing human telencephalon.
-    2. [HEK293T](https://support.10xgenomics.com/single-cell-gene-expression/datasets/3.0.2/5k_hgmm_v3_nextgem) - 3,468 HEK293T cells from a barnyard assay conducted by 10X.
-    3. [Puram et al., 2017](head and neck squamous cell carcinoma (HNSCC) tumors) - scRNA-seq from head and neck squamous cell carcinoma (HNSCC) tumors (GSE103322).
+We classified seven human scRNA-seq studies:
+    1. [Tirosh et al., 2016](https://pubmed.ncbi.nlm.nih.gov/27806376/) - grade II oligodendrogliomas that are IDH1 mutant (GSE70630).
+    2. [Venteicher et al., 2017](https://pubmed.ncbi.nlm.nih.gov/28360267/) - grade III astrocytomas that are IDH1 mutant (GSE89567).
+    3. [Darmanis et al., 2017](https://pubmed.ncbi.nlm.nih.gov/29091775/) - grade IV glioblastomas that are IDH wild-type (GSE84465).
+    4. [Neftel et al., 2019](https://pubmed.ncbi.nlm.nih.gov/31327527/) - grade IV glioblastomas that are IDH wild-type (GSE131928).
+    5. [Bhaduri et al., 2020](https://pubmed.ncbi.nlm.nih.gov/31901251/) - grade IV glioblastomas that are IDH wild-type (PRJNA579593).
+    6. [Wang et al., 2020](https://pubmed.ncbi.nlm.nih.gov/32004492/) - grade IV glioblastomas that are IDH wild-type (GSE139448).
+    7. [Filbin et al., 2018](https://pubmed.ncbi.nlm.nih.gov/29674595/) - diffuse midline glioma with H3K27M (GSE102130)
 ```console
 root@ef02b3a45938:/files/U5_hNSC_Neural_G0# python3 classifyPrimaryCells_gliomas.py
 ```
 This script will output two files for each study:
-- **results/ccAF_results_\*.csv** - a table where the cells are rows and the columns are meta-information about the cells and 'Predictions', which are the predicted ccAF labels. The asterisk will be replaced with the name of the study:  Nowakowski_norm, HECK293T, and GSE103322.
-- **results/table1_\*.csv** - a confusion matrix of counts for each study. The asterisk will be replaced with the name of the study:  Nowakowski_norm, HECK293T, and GSE103322.
-
+- **results/ccAF_results_\*.csv** - a table where the cells are rows and the columns are meta-information about the cells and 'Predictions', which are the predicted ccAF labels. The asterisk will be replaced with the name of the study:  GSE70630, GSE89567, GSE854465_all, GSE131928_10X, GSE131928_Smartseq2, Bhaduri, GSE139448, GSE102130.
+- **results/table1_\*.csv** - a confusion matrix of counts for each study. The asterisk will be replaced with the name of the study:  GSE70630, GSE89567, GSE854465_all, GSE131928_10X, GSE131928_Smartseq2, Bhaduri, GSE139448, GSE102130.
 
 ### Contact
 For issues or comments please contact:  [Chris Plaisier](mailto:plaisier@asu.edu)
