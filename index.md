@@ -214,20 +214,55 @@ This script will output:
 - **ccAdata_velocity_stream_tsne.png** - tSNE embeddings with RNA velocity stream lines.
 
 #### 3. Pepare data for building classifier
-We faciliatate further analysis in Python by converting the 
-converting_to_loom.R
+We faciliatate further analysis in Python by converting the WT U5 hNSC data into a loom file:
+```console
+root@ef02b3a45938:/files/U5_hNSC_Neural_G0# Rscript converting_to_loom.R
+```
+This script will output:
+- **highlyVarGenes_WT_sgTAOK1_1584.csv** - list of the overlapping top 2,000 highly varaiable genes from UT and sgTAOK1.
+- **cellcycle_int_integrated.loom** - loom file used to construct the ccAF classifier.
 
 #### 4. Build classifier: 100-fold cross-validation
-cvClassification_FullAnalysis.py
-calculatingErrors_CV.py
-plottingClassifiers.py
+[SAM FILL THIS IN]
+```console
+root@ef02b3a45938:/files/U5_hNSC_Neural_G0# python3 cvClassification_FullAnalysis.py
+```
+This script will output:
+- **???** - ???.
+[SAM FILL THIS IN]
+```console
+root@ef02b3a45938:/files/U5_hNSC_Neural_G0# python3 calculatingErrors_CV.py
+```
+This script will output:
+- **???** - ???.
+[SAM FILL THIS IN]
+```console
+root@ef02b3a45938:/files/U5_hNSC_Neural_G0# python3 plottingClassifiers.py
+```
+This script will output:
+- **???** - ???.
 
 #### 5. Sensitivity analysis
-sensitivityAnalysis_run.py
-sensitivityAnalysis_plot.py
+[SAM FILL THIS IN]
+```console
+root@ef02b3a45938:/files/U5_hNSC_Neural_G0# python3 sensitivityAnalysis_run.py
+```
+This script will output:
+- **???** - ???.
+[SAM FILL THIS IN]
+```console
+root@ef02b3a45938:/files/U5_hNSC_Neural_G0# python3 sensitivityAnalysis_plot.py
+```
+This script will output:
+- **???** - ???.
 
 #### 6. Whitfield et al., 2002 gold-standard classification
-Whitfield_classification_ACTINN_analysis.py
+[SAM FILL THIS IN]
+```console
+root@ef02b3a45938:/files/U5_hNSC_Neural_G0# python3 Whitfield_classification_ACTINN_analysis.py
+```
+This script will output:
+- **???** - ???.
 
 #### 7. Classify human scRNA-seq datasets
 classifyPrimaryCells_homoSapiens.py
