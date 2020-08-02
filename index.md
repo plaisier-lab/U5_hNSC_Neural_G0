@@ -223,26 +223,34 @@ This script will output:
 - **results/cellcycle_int_integrated.loom** - loom file used to construct the ccAF classifier.
 
 #### 4. Build classifier: 100-fold cross-validation
-[SAM FILL THIS IN]
+We used the hNSC scRNA-seq data to build a cell cycle classifier. We tested four different methods which were previously found to be [useful for building classifiers from scRNA-seq profiles](https://pubmed.ncbi.nlm.nih.gov/31500660): 
+> 1. [Support Vector Machine with rejection (SVMrej)](https://scikit-learn.org/stable/modules/svm.html)
+> 2. [Random Forest (RF)]
+> 3. scRNA-seq optimized [K-Nearest Neighbors (KNN)](https://pubmed.ncbi.nlm.nih.gov/29409532)
+> 4. scRNA-seq optimized [ACTINN Neural Network (NN) method](https://pubmed.ncbi.nlm.nih.gov/31359028).
+We selected the 1,536 most highly variable genes in the U5-hNSC scRNA-seq profiles as the training dataset for the classifier. We then used 100-fold cross-validation (CV) to determine the best method:
 ```console
 root@ef02b3a45938:/files/U5_hNSC_Neural_G0# python3 cvClassification_FullAnalysis.py
 ```
-This script will output:
-- **results/results/???** - ???.
+This script will output two files for each method tested:
+- **results/\<method\>/ccAF_CV_results.csv** - The true labels, and predicted labels for the test sets from each cross-valdiation iteration. The \<method\> will be replaced with the name of the method:  SVMrej, RF, KNN, and ACTINN.
+- **results/\<method\>/CV_classification_report.csv** - Classification reports that have F1 scores and other metrics for classifier quality control. The \<method\> will be replaced with the name of the method:  SVMrej, RF, KNN, and ACTINN.
 
-[SAM FILL THIS IN]
+This script will calculate the errors for each method:
 ```console
 root@ef02b3a45938:/files/U5_hNSC_Neural_G0# python3 calculatingErrors_CV.py
 ```
 This script will output:
-- **results/???** - ???.
+- **results/errors_cross_validation.csv** - The error rate based on the 100-fold CV.
 
-[SAM FILL THIS IN]
+This script makes box plots of the F1 quality control metric:
 ```console
 root@ef02b3a45938:/files/U5_hNSC_Neural_G0# python3 plottingClassifiers.py
 ```
 This script will output:
-- **results/???** - ???.
+- **results/cell_cycle_states_CV_stats.csv** - Mean of stats for each classifier method and cell cycle state.
+- **results/CV_plots/F1_scores_for_each_state_per_classifier_1536.pdf** - A boxplot of each classifier method stratified by cell cycle state.
+- **results/CV_plots/F1_scores_for_each_state_per_classifier_1536_2.pdf** - A boxplot of each cell cycle state stratified by classifier method.
 
 #### 5. Sensitivity analysis
 [SAM FILL THIS IN]
