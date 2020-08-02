@@ -179,7 +179,23 @@ If you are able to change to the 'U5_hNSC_Neual_G0 directory' you should be read
 The order of analyses in this study and the details of each analysis are described below:
 
 #### 1. Identification of cell cycle phases
-U5_hNSC_scRNA_seq_Analysis.R
+---
+**NOTE:** This code requires an extra installation step to revert the R package Seurat to V2.3.4. To install Seurat V2.3.4 please run the following command:
+```console
+root@ef02b3a45938:/files/U5_hNSC_Neural_G0# R
+> source("https://z.umn.edu/archived-seurat")
+```
+Once this portion of the analysis is completed please close the Docker instance by typing 'exit' into the console until you return to your base operating system. Then restart the Docker instance as described above.
+---
+Using scRNA-seq we profiled 5,973 actively dividing U5-hNSCs (Bressan et al, 2017) to identify the single-cell gene expression states corresponding to cell cycle phases with a focus on G0/G1 subpopulations. This will take in the scRNA-seq data from the 'data/U5_hNSC' directory where the 10X cellranger outputs for the U5 hNSCs are stored.
+```console
+root@ef02b3a45938:/files/U5_hNSC_Neural_G0# Rscript U5_hNSC_scRNA_seq_Analysis.R
+```
+This script will output:
+- tsne_cell_embeddings_Perplexity_26.csv
+- results/eightClusters_WT_sgTAOK1.csv
+- results/TSNE_perplexity_26.pdf
+- results/cellCycleNetwork.pdf
 
 #### 2. Pepare data for building classifier
 converting_to_loom.R
