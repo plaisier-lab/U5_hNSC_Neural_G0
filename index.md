@@ -9,14 +9,14 @@
     - **[Directory structure](#directory-structure)**
 - **[Docker container](#docker-container)**
 - **[Order of operations](#order-of-operations)**
-    1. **[Identification of cell cycle phases](1_identification_of_cell_cycle_phases)**
-    2. **[Pepare data for building classifier](2_pepare_data_for_building_classifier)**
-    3. **[Build classifier: 100-fold cross-validation](3_build_classifier_100-fold_cross_validation)**
-    4. **[Sensitivity analysis](4_sensitivity_analysis)**
-    5. **[Whitfield et al., 2002 gold-standard classification](5_whitfield_et_al_2002_gold_standard_classification)**
-    6. **[Classify human scRNA-seq datasets](6_classify_human_scRNA_seq_datasets)**
-    7. **[Classify mouse scRNA-seq datasets](7_classify_mouse_scRNA_seq_datasets)**
-    8. **[Classify glioma scRNA-seq datasets](8_classify_glioma_scRNA_seq_datasets)**
+    1. **[Identification of cell cycle phases](#1_identification_of_cell_cycle_phases)**
+    2. **[Pepare data for building classifier](#2_pepare_data_for_building_classifier)**
+    3. **[Build classifier: 100-fold cross-validation](#3_build_classifier_100-fold_cross_validation)**
+    4. **[Sensitivity analysis](#4_sensitivity_analysis)**
+    5. **[Whitfield et al., 2002 gold-standard classification](#5_whitfield_et_al_2002_gold_standard_classification)**
+    6. **[Classify human scRNA-seq datasets](#6_classify_human_scRNA_seq_datasets)**
+    7. **[Classify mouse scRNA-seq datasets](#7_classify_mouse_scRNA_seq_datasets)**
+    8. **[Classify glioma scRNA-seq datasets](#8_classify_glioma_scRNA_seq_datasets)**
 - **[Contact](#contact)**
 - **[Citation](#citation)**
 
