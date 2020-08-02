@@ -7,7 +7,7 @@
 - **[Data and code availability](#data-and-code-availability)**
 - **[Instructions to setup data and code for recreating analyses](#instructions-to-setup-data-and-code-for-recreating-analyses)**
 - **[Directory structure](#directory-structure)**
-- **[Order of operation](#order-of-operation)**
+- **[Order of operations](#order-of-operation)**
 - **[Contact](#contact)**
 - **[Citation](#citation)**
 
@@ -23,12 +23,12 @@ In order to run the software and scripts you will need to setup a specific direc
 1. Clone the [U5_hNSC_Neural_G0 repository](https://github.com/plaisier-lab/U5_hNSC_Neural_G0/)
 2. Make a "data" folder inside the U5_hNSC_Neural_G0 folder
 3. Download (and unzip for zip files) all files from [figshare](https://figshare.com/projects/Neural_G0_a_quiescent-like_state_found_in_neuroepithelial-derived_cells_and_glioma/86939):
-    - U5_hNSC.zip (needs to be unzipped) - contains all the U5 hNSC scRNA-seq datasets as output from cellranger.
-    - ccAF_1536_smaller.pkl (does not need to be unzipped) - the ccAF ACTINN loadings for classification of cell cycle phases for cells or transcriptome profiles.
-    - geneConversions.zip (needs to be unzipped) - helpful gene ID conversion files.
-    - forClassification.zip (needs to be unzipped) - loom data files that were classified using ccAF.
-    - ssGSEA.GBM.classification.zip (needs to be unzipped) - subtype classification results for all glioma datasets.
-    - cellcycle_int_integrated.loom (does not need to be unzipped) - U5 hNSC data as a loom file that was used to build the ccAF classifier.
+    - [U5_hNSC.zip](https://figshare.com/articles/dataset/U5_hNSC_zip/12751082) (needs to be unzipped) - contains all the U5 hNSC scRNA-seq datasets as output from cellranger.
+    - [ccAF_1536_smaller.pkl](https://figshare.com/articles/software/ccAF_1536_smaller_pkl/12751058) (does not need to be unzipped) - the ccAF ACTINN loadings for classification of cell cycle phases for cells or transcriptome profiles.
+    - [geneConversions.zip](https://figshare.com/articles/dataset/geneConversions_zip/12751073) (needs to be unzipped) - helpful gene ID conversion files.
+    - [forClassification.zip](https://figshare.com/articles/dataset/forClassification_zip/12751079) (needs to be unzipped) - loom data files that were classified using ccAF.
+    - [ssGSEA.GBM.classification.zip](https://figshare.com/articles/dataset/ssGSEA_GBM_classification_zip/12751076) (needs to be unzipped) - subtype classification results for all glioma datasets.
+    - [cellcycle_int_integrated.loom](https://figshare.com/articles/dataset/cellcycle_int_integrated_loom/12751055) (does not need to be unzipped) - U5 hNSC data as a loom file that was used to build the ccAF classifier.
 
 
 #### Directory structure
