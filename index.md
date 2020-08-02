@@ -280,6 +280,7 @@ This script will output two files for each study:
 - **results/ccAF_results_\*.csv** - a table where the cells are rows and the columns are meta-information about the cells and 'Predictions', which are the predicted ccAF labels. The asterisk will be replaced with the name of the study:  Nowakowski_norm, HECK293T, and GSE103322.
 - **results/table1_\*.csv** - a confusion matrix of counts for each study. The asterisk will be replaced with the name of the study:  Nowakowski_norm, HECK293T, and GSE103322.
 
+The Nowakowski et al., 2017 results were then plotted to be added to figure 2:
 ```console
 root@ef02b3a45938:/files/U5_hNSC_Neural_G0# python3 plotNowakowski.py
 ```
