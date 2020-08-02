@@ -9,6 +9,14 @@
     - **[Directory structure](#directory-structure)**
 - **[Docker container](#docker-container)**
 - **[Order of operations](#order-of-operations)**
+    1. **[Identification of cell cycle phases](1__identification_of_cell_cycle_phases)**
+    2. **[Pepare data for building classifier](2__pepare_data_for_building_classifier)**
+    3. **[Build classifier: 100-fold cross-validation](3__build_classifier__100_fold_cross_validation)**
+    4. **[Sensitivity analysis](4__sensitivity_analysis)**
+    5. **[Whitfield et al., 2002 gold-standard classification](5__whitfield_et_al___2002_gold_standard_classification)**
+    6. **[Classify human scRNA-seq datasets](6__classify_human_scRNA_seq_datasets)**
+    7. **[Classify mouse scRNA-seq datasets](7__classify_mouse_scRNA_seq_datasets)**
+    8. **[Classify glioma scRNA-seq datasets](8__classify_glioma_scRNA_seq_datasets)**
 - **[Contact](#contact)**
 - **[Citation](#citation)**
 
