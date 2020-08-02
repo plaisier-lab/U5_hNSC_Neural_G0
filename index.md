@@ -6,7 +6,8 @@
 - **[Abstract](#abstract)**
 - **[Data and code availability](#data-and-code-availability)**
 - **[Instructions to setup data and code for recreating analyses](#instructions-to-setup-data-and-code-for-recreating-analyses)**
-- **[Directory structure](#directory-structure)**
+    - **[Directory structure](#directory-structure)**
+- **[Docker container](#docker-container)**
 - **[Order of operations](#order-of-operations)**
 - **[Contact](#contact)**
 - **[Citation](#citation)**
@@ -135,15 +136,46 @@ The results directory will hold the output from analysis scripts.
 ### Docker container
 We facilitate the use of our code and data by providing a Docker Hub container [cplaisier/scrna_seq_velocity](https://hub.docker.com/r/cplaisier/scrna_seq_velocity) which has all the dependencies and libraries to run the scripts. Please install Docker and then from the command line run:
 
-```shell
+```Shell
 docker pull cplaisier/scrna_seq_velocity
+```
+
+Then run the Docker container using the following command:
+
+```Shell
+docker run -it -v '<where you put U5_hNSC_Neural_G0>:/files' cplaisier/scrna_seq_velocity
 ```
 
 ### Order of operations
 The order of analyses in this study and the details of each analysis are described below:
 
-#### 1. Identification of cell cycle phases and candidate G0/G1 subpopulations in human NSCs
+#### 1. Identification of cell cycle phases
+U5_hNSC_scRNA_seq_Analysis.R
 
+#### 2. Pepare data for building classifier
+converting_to_loom.R
+
+#### 3. Build classifier: 100-fold cross-validation
+cvClassification_FullAnalysis.py
+calculatingErrors_CV.py
+plottingClassifiers.py
+
+#### 4. Sensitivity analysis
+sensitivityAnalysis_run.py
+sensitivityAnalysis_plot.py
+
+#### 5. Whitfield et al., 2002 gold-standard classification
+Whitfield_classification_ACTINN_analysis.py
+
+#### 6. Classify human scRNA-seq datasets
+classifyPrimaryCells_homoSapiens.py
+plotNowakowski.py
+
+#### 7. Classify mouse scRNA-seq datasets
+classifyPrimaryCells_musMusculus.py
+
+#### 8. Classify glioma scRNA-seq datasets
+classifyPrimaryCells_gliomas.py
 
 ### Contact
 For issues or comments please contact:  [Chris Plaisier](mailto:plaisier@asu.edu)
