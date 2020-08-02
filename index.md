@@ -8,7 +8,7 @@
 - **[Instructions to setup data and code for recreating analyses](#instructions-to-setup-data-and-code-for-recreating-analyses)**
     - **[Directory structure](#directory-structure)**
 - **[Docker container](#docker-container)**
-- **[Order of operations](#order-of-operations)**
+- **[Aanalyses](#Analyses)**
     1. **[Identification of cell cycle phases](#1-identification-of-cell-cycle-phases)**
     2. **[Pepare data for building classifier](#2-pepare-data-for-building-classifier)**
     3. **[Build classifier: 100-fold cross-validation](#3-build-classifier-100-fold-cross-validation)**
@@ -30,6 +30,9 @@ In depth knowledge of the cellular states associated with normal and disease tis
 ### Instructions to setup data and code for recreating analyses
 In order to run the software and scripts you will need to setup a specific directory structure and download all the data and scripts. Here are the instructions to setup things up:
 1. Clone the [U5_hNSC_Neural_G0 repository](https://github.com/plaisier-lab/U5_hNSC_Neural_G0/)
+```console
+git clone https://github.com/plaisier-lab/U5_hNSC_Neural_G0.git
+```
 2. Make a "data" folder inside the U5_hNSC_Neural_G0 folder
 3. Download (and unzip for zip files) all files from [figshare](https://figshare.com/projects/Neural_G0_a_quiescent-like_state_found_in_neuroepithelial-derived_cells_and_glioma/86939):
     - [U5_hNSC.zip](https://figshare.com/articles/dataset/U5_hNSC_zip/12751082) (needs to be unzipped) - contains all the U5 hNSC scRNA-seq datasets as output from cellranger.
@@ -142,19 +145,17 @@ After downloading and unzipping the files the directory structure should look li
 The results directory will hold the output from analysis scripts.
 
 ### Docker container
-We facilitate the use of our code and data by providing a Docker Hub container [cplaisier/scrna_seq_velocity](https://hub.docker.com/r/cplaisier/scrna_seq_velocity) which has all the dependencies and libraries to run the scripts. Please install Docker and then from the command line run:
-
-```Shell
+We facilitate the use of our code and data by providing a Docker Hub container [cplaisier/scrna_seq_velocity](https://hub.docker.com/r/cplaisier/scrna_seq_velocity) which has all the dependencies and libraries to run the scripts. Please [install Docker](https://docs.docker.com/get-docker/) and then from the command line run:
+```console
 docker pull cplaisier/scrna_seq_velocity
 ```
-
-Then run the Docker container using the following command:
-
-```Shell
-docker run -it -v '<where you put U5_hNSC_Neural_G0>:/files' cplaisier/scrna_seq_velocity
+Then run the Docker container using the following command (replace <the directory holding U5_hNSC_Neural_G0> with the directory where you have cloned the U5_hNSC_Neural_G0 repository):
+```console
+docker run -it -v '<the directory holding U5_hNSC_Neural_G0>:/files' cplaisier/scrna_seq_velocity
 ```
+This will start the Docker container and should 
 
-### Order of operations
+### Analyses
 The order of analyses in this study and the details of each analysis are described below:
 
 #### 1. Identification of cell cycle phases
