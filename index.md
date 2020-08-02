@@ -8,7 +8,7 @@
 - **[Instructions to setup data and code for recreating analyses](#instructions-to-setup-data-and-code-for-recreating-analyses)**
     - **[Directory structure](#directory-structure)**
 - **[Docker container](#docker-container)**
-- **[Aanalyses](#Analyses)**
+- **[Analyses](#Analyses)**
     1. **[Identification of cell cycle phases](#1-identification-of-cell-cycle-phases)**
     2. **[Resolving the flow of cells through the cell cycle using RNA velocity](#2-resolving-the-flow-of-cells-through-the-cell-cycle-using-rna-velocity)**
     3. **[Pepare data for building classifier](#3-pepare-data-for-building-classifier)**
@@ -40,7 +40,7 @@ cd U5_hNSC_Neural_G0
 mkdir data
 ```
 3. Download (and unzip for zip files) all files from [figshare](https://figshare.com/projects/Neural_G0_a_quiescent-like_state_found_in_neuroepithelial-derived_cells_and_glioma/86939):
-    - [U5_hNSC.zip](https://figshare.com/articles/dataset/U5_hNSC_zip/12751082) (needs to be unzipped) - contains all the U5 hNSC scRNA-seq datasets as output from cellranger.
+    - [U5_hNSC.zip](https://figshare.com/articles/dataset/U5_hNSC_zip/12751082) (needs to be unzipped) - contains all the U5-hNSC scRNA-seq datasets as output from cellranger.
     - [ccAF_1536_smaller.pkl](https://figshare.com/articles/software/ccAF_1536_smaller_pkl/12751058) (does not need to be unzipped) - the ccAF ACTINN loadings for classification of cell cycle phases for cells or transcriptome profiles.
     - [geneConversions.zip](https://figshare.com/articles/dataset/geneConversions_zip/12751073) (needs to be unzipped) - helpful gene ID conversion files.
     - [forClassification.zip](https://figshare.com/articles/dataset/forClassification_zip/12751079) (needs to be unzipped) - loom data files that were classified using ccAF.
@@ -63,7 +63,6 @@ After downloading and unzipping the files the directory structure should look li
 .
 +-- U5_hNSC_Neural_G0
 |   +-- actinn.py
-|   +-- calculatingErrors.py
 |   +-- calculatingErrors_CV.py
 |   +-- calculatingErrors_Whitfield.py
 |   +-- classifiersV3.py
@@ -190,7 +189,7 @@ The order of analyses in this study and the details of each analysis are describ
 > ```
 > Once this portion of the analysis is completed please close the Docker instance by typing 'exit' into the console until you return to your base operating system. Then restart the Docker instance as described above.
 
-Using scRNA-seq we profiled 5,973 actively dividing U5-hNSCs (Bressan et al, 2017) to identify the single-cell gene expression states corresponding to cell cycle phases with a focus on G0/G1 subpopulations. This will take in the scRNA-seq data from the 'data/U5_hNSC' directory where the 10X cellranger outputs for the U5 hNSCs are stored.
+Using scRNA-seq we profiled 5,973 actively dividing U5-hNSCs (Bressan et al, 2017) to identify the single-cell gene expression states corresponding to cell cycle phases with a focus on G0/G1 subpopulations. This will take in the scRNA-seq data from the 'data/U5_hNSC' directory where the 10X cellranger outputs for the U5-hNSCs are stored.
 
 ```console
 root@ef02b3a45938:/files/U5_hNSC_Neural_G0# Rscript U5_hNSC_scRNA_seq_Analysis.R
@@ -198,13 +197,13 @@ root@ef02b3a45938:/files/U5_hNSC_Neural_G0# Rscript U5_hNSC_scRNA_seq_Analysis.R
 
 This script will output:
 - **results/tsne_cell_embeddings_Perplexity_26.csv** - TSNE embeddings for use in later plots.
-- **results/eightClusters_WT_sgTAOK1.csv** - marker genes that discriminate between U5 hNSC cell cycle clusters.
-- **results/TSNE_perplexity_26.pdf** - TSNE plot for U5 hNSC WT.
+- **results/eightClusters_WT_sgTAOK1.csv** - marker genes that discriminate between U5-hNSC cell cycle clusters.
+- **results/TSNE_perplexity_26.pdf** - TSNE plot for U5-hNSC WT.
 - **results/cellCycleNetwork.pdf** - network that shows how each cell cycle cluster connects to the other clusters.
 - Three hypergeometric p-values for overlaps with YAP target genes which are printed out to the console.
 
 #### 2. Resolving the flow of cells through the cell cycle using RNA velocity 
-We added directionality to the edges using RNA velocity which computes the ratio of unspliced to spliced transcripts and infers the likely trajectory of cells through a two-dimensional single cell embedding, e.g. tSNE. The RNA velocity trajectories delineate the cell cycle in the expected orientation. First, we use velocyto to realign the transcriptome and tabulate spliced and unspliced transcript counts for each gene (we provide the result of this and not the raw data and genome build from 10X are very large [genome build used from cellranger](https://support.10xgenomics.com/single-cell-gene-expression/software/release-notes/build#hg19_3.0.0)):
+We added directionality to the edges using RNA velocity which computes the ratio of unspliced to spliced transcripts and infers the likely trajectory of cells through a two-dimensional single cell embedding, e.g. tSNE. The RNA velocity trajectories delineate the cell cycle in the expected orientation. First, we use velocy to realign the transcriptome and tabulate spliced and unspliced transcript counts for each gene (we provide the result of this and not the raw data and genome build from 10X are very large [genome build used from cellranger](https://support.10xgenomics.com/single-cell-gene-expression/software/release-notes/build#hg19_3.0.0)):
 
 ```console
 root@ef02b3a45938:/files/U5_hNSC_Neural_G0# velocyto run10x -m hg19_rmsk.gtf WT genes.gtf
@@ -213,7 +212,7 @@ root@ef02b3a45938:/files/U5_hNSC_Neural_G0# velocyto run10x -m hg19_rmsk.gtf WT 
 This analysis will output:
  - **data/U5_hNSC/WT/U5_velocyto.loom** - a loom file with the matrix of spliced and unspliced reads for each gene.
  
-Then, we use scvelo to take in the unsplied and spliced transcript counts and compute the RNA velocities and stream lines.
+Then, we use scvelo to take in the unspliced and spliced transcript counts and compute the RNA velocities and stream lines.
 
 ```console
 root@ef02b3a45938:/files/U5_hNSC_Neural_G0# python3 scvelo_analysis.py
@@ -257,7 +256,7 @@ root@ef02b3a45938:/files/U5_hNSC_Neural_G0# python3 calculatingErrors_CV.py
 This script will output:
 - **results/errors_cross_validation.csv** - The error rate based on the 100-fold CV.
 
-This script makes box plots of the F1 quality control metric:
+This script makes box plots of the F1 quality control metrics:
 ```console
 root@ef02b3a45938:/files/U5_hNSC_Neural_G0# python3 plottingClassifiers.py
 ```
@@ -304,8 +303,8 @@ root@ef02b3a45938:/files/U5_hNSC_Neural_G0# python3 classifyPrimaryCells_homoSap
 ```
 
 This script will output two files for each study:
-- **results/ccAF_results_\*.csv** - a table where the cells are rows and the columns are meta-information about the cells and 'Predictions', which are the predicted ccAF labels. The asterisk will be replaced with the name of the study:  Nowakowski_norm, HECK293T, and GSE103322.
-- **results/table1_\*.csv** - a confusion matrix of counts for each study. The asterisk will be replaced with the name of the study:  Nowakowski_norm, HECK293T, and GSE103322.
+- **results/ccAF_results_\*.csv** - a table where the cells are rows and the columns are meta-information about the cells and 'Predictions', which are the predicted ccAF labels. The asterisk will be replaced with the name of the study:  Nowakowski_norm, HEK293T, and GSE103322.
+- **results/table1_\*.csv** - a confusion matrix of counts for each study. The asterisk will be replaced with the name of the study:  Nowakowski_norm, HEK293T, and GSE103322.
 
 The Nowakowski et al., 2017 results were then plotted to be added to figure 2:
 
