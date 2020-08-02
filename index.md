@@ -7,6 +7,9 @@
 - **[Data and code availability](#data-and-code-availability)**
 - **[Instructions to setup data and code for recreating analyses](#instructions-to-setup-data-and-code-for-recreating-analyses)**
 - **[Directory structure](#directory-structure)**
+- **[Order of operation](#order-of-operation)**
+- **[Contact](#contact)**
+- **[Citation](#citation)**
 
 ### Abstract
 In depth knowledge of the cellular states associated with normal and disease tissue homeostasis is critical for understanding disease etiology and uncovering therapeutic opportunities. Here, we used single cell RNA-seq to survey the cellular states of neuroepithelial-derived cells in cortical and neurogenic regions of developing and adult mammalian brain to compare with 38,474 cells obtained from 59 human gliomas, as well as pluripotent ESCs, endothelial cells, CD45+ immune cells, and non-CNS cancers. This analysis suggests that a significant portion of neuroepithelial-derived stem and progenitor cells and glioma cells that are not in G2/M or S phase exist in two states: G1 or Neural G0, defined by expression of certain neuro-developmental genes. In gliomas, higher overall Neural G0 gene expression is significantly associated with less aggressive gliomas, IDH1 mutation, and extended patient survival, while also anti-correlated with cell cycle gene expression. Knockout of genes associated with the Hippo/Yap and p53 pathways diminished Neural G0 in vitro, resulting in faster G1 transit, down regulation of quiescence-associated markers, and loss of Neural G0 gene expression. Thus, Neural G0 is a dynamic cellular state required for indolent cell cycles in neural-specified stem and progenitors poised for cell division. As a result, Neural G0 occupancy may be an important determinant of glioma tumor progression.
@@ -127,14 +130,13 @@ After downloading and unzipping the files the directory structure should look li
 |   +-- Whitfield_classification_ACTINN_analysis.py
 ```
 
-The results is a directory that will hold all the output from the scripts.
+The results directory will hold the output from analysis scripts.
 
-#### Order of operations
+### Order of operations
 
 
-### Support or Contact
-
+### Contact
 For issues or comments please contact:  [Chris Plaisier](mailto:plaisier@asu.edu)
 
 ### Citation
-Neural G0: a quiescent-like state found in neuroepithelial-derived cells and glioma. Samantha A. O'Connor, Heather M. Feldman, Chad M. Toledo, Sonali Arora, Pia Hoellerbauer, Philip Corrin, Lucas Carter, Megan Kufeld, Hamid Bolouri, Ryan Basom, Jeffrey Delrow, José L. McFaline-Figueroa, Cole Trapnell, Steven M. Pollard, Anoop Patel, Patrick J. Paddison, Christopher L. Plaisier. bioRxiv 446344; doi: https://doi.org/10.1101/446344
+(Neural G0: a quiescent-like state found in neuroepithelial-derived cells and glioma.)[https://doi.org/10.1101/446344] Samantha A. O'Connor, Heather M. Feldman, Chad M. Toledo, Sonali Arora, Pia Hoellerbauer, Philip Corrin, Lucas Carter, Megan Kufeld, Hamid Bolouri, Ryan Basom, Jeffrey Delrow, José L. McFaline-Figueroa, Cole Trapnell, Steven M. Pollard, Anoop Patel, Patrick J. Paddison, Christopher L. Plaisier. bioRxiv 446344; doi: (https://doi.org/10.1101/446344)[https://doi.org/10.1101/446344]
