@@ -270,9 +270,9 @@ This script will output:
 
 #### 7. Classify human scRNA-seq datasets
 We classified three human scRNA-seq studies:
-    1. [Noakowski et al., 2017](https://pubmed.ncbi.nlm.nih.gov/29217575/) - allowed us to investigate how Neural G0 might arise during mammalian development by applying the ccAF to data from the developing human telencephalon.
-    2. [HEK293T](https://support.10xgenomics.com/single-cell-gene-expression/datasets/3.0.2/5k_hgmm_v3_nextgem) - 3,468 HEK293T cells from a barnyard assay conducted by 10X.
-    3. [Puram et al., 2017](head and neck squamous cell carcinoma (HNSCC) tumors) - scRNA-seq from head and neck squamous cell carcinoma (HNSCC) tumors (GSE103322).
+1. [Noakowski et al., 2017](https://pubmed.ncbi.nlm.nih.gov/29217575/) - allowed us to investigate how Neural G0 might arise during mammalian development by applying the ccAF to data from the developing human telencephalon.
+2. [HEK293T](https://support.10xgenomics.com/single-cell-gene-expression/datasets/3.0.2/5k_hgmm_v3_nextgem) - 3,468 HEK293T cells from a barnyard assay conducted by 10X.
+3. [Puram et al., 2017](head and neck squamous cell carcinoma (HNSCC) tumors) - scRNA-seq from head and neck squamous cell carcinoma (HNSCC) tumors (GSE103322).
 ```console
 root@ef02b3a45938:/files/U5_hNSC_Neural_G0# python3 classifyPrimaryCells_homoSapiens.py
 ```
@@ -289,8 +289,8 @@ This script will output two files for each study:
 
 #### 8. Classify mouse scRNA-seq datasets
 We classified three mouse scRNA-seq studies:
-    1. [Llorens-Bobadilla et al., 2015](https://www.ncbi.nlm.nih.gov/pubmed/26235341) - defined quiescent neural stem cell (qNSC) and active (aNSC) subpopulations from adult mouse subbentricular zone (GSE67833).
-    2. [Dulken et al., 2017](https://www.ncbi.nlm.nih.gov/pubmed/28099854) - perform single cell transcriptomics on neural stem cells (NSCs) from adult mice (PRJNA324289).
+1. [Llorens-Bobadilla et al., 2015](https://www.ncbi.nlm.nih.gov/pubmed/26235341) - defined quiescent neural stem cell (qNSC) and active (aNSC) subpopulations from adult mouse subbentricular zone (GSE67833).
+2. [Dulken et al., 2017](https://www.ncbi.nlm.nih.gov/pubmed/28099854) - perform single cell transcriptomics on neural stem cells (NSCs) from adult mice (PRJNA324289).
 ```console
 root@ef02b3a45938:/files/U5_hNSC_Neural_G0# python3 classifyPrimaryCells_musMusculus.py
 ```
@@ -300,13 +300,13 @@ This script will output two files for each study:
 
 #### 9. Classify glioma scRNA-seq datasets
 We classified seven human scRNA-seq studies:
-    1. [Tirosh et al., 2016](https://pubmed.ncbi.nlm.nih.gov/27806376/) - grade II oligodendrogliomas that are IDH1 mutant (GSE70630).
-    2. [Venteicher et al., 2017](https://pubmed.ncbi.nlm.nih.gov/28360267/) - grade III astrocytomas that are IDH1 mutant (GSE89567).
-    3. [Darmanis et al., 2017](https://pubmed.ncbi.nlm.nih.gov/29091775/) - grade IV glioblastomas that are IDH wild-type (GSE84465).
-    4. [Neftel et al., 2019](https://pubmed.ncbi.nlm.nih.gov/31327527/) - grade IV glioblastomas that are IDH wild-type (GSE131928).
-    5. [Bhaduri et al., 2020](https://pubmed.ncbi.nlm.nih.gov/31901251/) - grade IV glioblastomas that are IDH wild-type (PRJNA579593).
-    6. [Wang et al., 2020](https://pubmed.ncbi.nlm.nih.gov/32004492/) - grade IV glioblastomas that are IDH wild-type (GSE139448).
-    7. [Filbin et al., 2018](https://pubmed.ncbi.nlm.nih.gov/29674595/) - diffuse midline glioma with H3K27M (GSE102130)
+1. [Tirosh et al., 2016](https://pubmed.ncbi.nlm.nih.gov/27806376/) - grade II oligodendrogliomas that are IDH1 mutant (GSE70630).
+2. [Venteicher et al., 2017](https://pubmed.ncbi.nlm.nih.gov/28360267/) - grade III astrocytomas that are IDH1 mutant (GSE89567).
+3. [Darmanis et al., 2017](https://pubmed.ncbi.nlm.nih.gov/29091775/) - grade IV glioblastomas that are IDH wild-type (GSE84465).
+4. [Neftel et al., 2019](https://pubmed.ncbi.nlm.nih.gov/31327527/) - grade IV glioblastomas that are IDH wild-type (GSE131928).
+5. [Bhaduri et al., 2020](https://pubmed.ncbi.nlm.nih.gov/31901251/) - grade IV glioblastomas that are IDH wild-type (PRJNA579593).
+6. [Wang et al., 2020](https://pubmed.ncbi.nlm.nih.gov/32004492/) - grade IV glioblastomas that are IDH wild-type (GSE139448).
+7. [Filbin et al., 2018](https://pubmed.ncbi.nlm.nih.gov/29674595/) - diffuse midline glioma with H3K27M (GSE102130)
 ```console
 root@ef02b3a45938:/files/U5_hNSC_Neural_G0# python3 classifyPrimaryCells_gliomas.py
 ```
