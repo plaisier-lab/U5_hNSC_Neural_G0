@@ -192,7 +192,7 @@ Using scRNA-seq we profiled 5,973 actively dividing U5-hNSCs (Bressan et al, 201
 root@ef02b3a45938:/files/U5_hNSC_Neural_G0# Rscript U5_hNSC_scRNA_seq_Analysis.R
 ```
 This script will output:
-- **tsne_cell_embeddings_Perplexity_26.csv** - TSNE embeddings for use in later plots.
+- **results/tsne_cell_embeddings_Perplexity_26.csv** - TSNE embeddings for use in later plots.
 - **results/eightClusters_WT_sgTAOK1.csv** - marker genes that discriminate between U5 hNSC cell cycle clusters.
 - **results/TSNE_perplexity_26.pdf** - TSNE plot for U5 hNSC WT.
 - **results/cellCycleNetwork.pdf** - network that shows how each cell cycle cluster connects to the other clusters.
@@ -204,14 +204,14 @@ We added directionality to the edges using RNA velocity which computes the ratio
 root@ef02b3a45938:/files/U5_hNSC_Neural_G0# velocyto run10x -m hg19_rmsk.gtf WT genes.gtf
 ```
 This analysis will output:
- - **U5_velocyto.loom** - a loom file with the matrix of spliced and unspliced reads for each gene.
+ - **data/U5_hNSC/WT/U5_velocyto.loom** - a loom file with the matrix of spliced and unspliced reads for each gene.
  
 Then, we use scvelo to take in the unsplied and spliced transcript counts and compute the RNA velocities and stream lines.
 ```console
 root@ef02b3a45938:/files/U5_hNSC_Neural_G0# python3 scvelo_analysis.py
 ```
 This script will output:
-- **ccAdata_velocity_stream_tsne.png** - tSNE embeddings with RNA velocity stream lines.
+- **results/ccAdata_velocity_stream_tsne.png** - tSNE embeddings with RNA velocity stream lines.
 
 #### 3. Pepare data for building classifier
 We faciliatate further analysis in Python by converting the WT U5 hNSC data into a loom file:
@@ -219,8 +219,8 @@ We faciliatate further analysis in Python by converting the WT U5 hNSC data into
 root@ef02b3a45938:/files/U5_hNSC_Neural_G0# Rscript converting_to_loom.R
 ```
 This script will output:
-- **highlyVarGenes_WT_sgTAOK1_1584.csv** - list of the overlapping top 2,000 highly varaiable genes from UT and sgTAOK1.
-- **cellcycle_int_integrated.loom** - loom file used to construct the ccAF classifier.
+- **results/highlyVarGenes_WT_sgTAOK1_1584.csv** - list of the overlapping top 2,000 highly varaiable genes from UT and sgTAOK1.
+- **results/cellcycle_int_integrated.loom** - loom file used to construct the ccAF classifier.
 
 #### 4. Build classifier: 100-fold cross-validation
 [SAM FILL THIS IN]
@@ -228,19 +228,21 @@ This script will output:
 root@ef02b3a45938:/files/U5_hNSC_Neural_G0# python3 cvClassification_FullAnalysis.py
 ```
 This script will output:
-- **???** - ???.
+- **results/results/???** - ???.
+
 [SAM FILL THIS IN]
 ```console
 root@ef02b3a45938:/files/U5_hNSC_Neural_G0# python3 calculatingErrors_CV.py
 ```
 This script will output:
-- **???** - ???.
+- **results/???** - ???.
+
 [SAM FILL THIS IN]
 ```console
 root@ef02b3a45938:/files/U5_hNSC_Neural_G0# python3 plottingClassifiers.py
 ```
 This script will output:
-- **???** - ???.
+- **results/???** - ???.
 
 #### 5. Sensitivity analysis
 [SAM FILL THIS IN]
@@ -248,31 +250,66 @@ This script will output:
 root@ef02b3a45938:/files/U5_hNSC_Neural_G0# python3 sensitivityAnalysis_run.py
 ```
 This script will output:
-- **???** - ???.
+- **results/???** - ???.
+
 [SAM FILL THIS IN]
 ```console
 root@ef02b3a45938:/files/U5_hNSC_Neural_G0# python3 sensitivityAnalysis_plot.py
 ```
 This script will output:
-- **???** - ???.
+- **results/???** - ???.
 
 #### 6. Whitfield et al., 2002 gold-standard classification
 [SAM FILL THIS IN]
+[Whitfield et al., 2002](https://pubmed.ncbi.nlm.nih.gov/12058064/) - gold-standard dataset of 1,134 most cyclic genes was used to validate S & M phases from ccAF (http://genome-www.stanford.edu/Human-CellCycle/HeLa/).
 ```console
 root@ef02b3a45938:/files/U5_hNSC_Neural_G0# python3 Whitfield_classification_ACTINN_analysis.py
 ```
 This script will output:
-- **???** - ???.
+- **results/???** - ???.
 
 #### 7. Classify human scRNA-seq datasets
-classifyPrimaryCells_homoSapiens.py
-plotNowakowski.py
+We classified three human scRNA-seq studies:
+    1. [Noakowski et al., 2017](https://pubmed.ncbi.nlm.nih.gov/29217575/) - allowed us to investigate how Neural G0 might arise during mammalian development by applying the ccAF to data from the developing human telencephalon.
+    2. [HEK293T](https://support.10xgenomics.com/single-cell-gene-expression/datasets/3.0.2/5k_hgmm_v3_nextgem) - 3,468 HEK293T cells from a barnyard assay conducted by 10X.
+    3. [Puram et al., 2017](head and neck squamous cell carcinoma (HNSCC) tumors) - scRNA-seq from head and neck squamous cell carcinoma (HNSCC) tumors (GSE103322).
+```console
+root@ef02b3a45938:/files/U5_hNSC_Neural_G0# python3 classifyPrimaryCells_homoSapiens.py
+```
+This script will output two files for each study:
+- **results/ccAF_results_\*.csv** - a table where the cells are rows and the columns are meta-information about the cells and 'Predictions', which are the predicted ccAF labels. The asterisk will be replaced with the name of the study:  Nowakowski_norm, HECK293T, and GSE103322.
+- **results/table1_\*.csv** - a confusion matrix of counts for each study. The asterisk will be replaced with the name of the study:  Nowakowski_norm, HECK293T, and GSE103322.
+
+```console
+root@ef02b3a45938:/files/U5_hNSC_Neural_G0# python3 plotNowakowski.py
+```
+This script will output two files for each study:
+- **results/results/Nowakowski_ccAF_plot_Refined.pdf** - a stacked barplot that shows how the cells form each cell type in Nowakowski et al., 2017 are classified by ccAF.
 
 #### 8. Classify mouse scRNA-seq datasets
-classifyPrimaryCells_musMusculus.py
+We classified three human scRNA-seq studies:
+    1. [Noakowski et al., 2017](https://pubmed.ncbi.nlm.nih.gov/29217575/) - allowed us to investigate how Neural G0 might arise during mammalian development by applying the ccAF to data from the developing human telencephalon.
+    2. [HEK293T](https://support.10xgenomics.com/single-cell-gene-expression/datasets/3.0.2/5k_hgmm_v3_nextgem) - 3,468 HEK293T cells from a barnyard assay conducted by 10X.
+    3. [Puram et al., 2017](head and neck squamous cell carcinoma (HNSCC) tumors) - scRNA-seq from head and neck squamous cell carcinoma (HNSCC) tumors (GSE103322).
+```console
+root@ef02b3a45938:/files/U5_hNSC_Neural_G0# python3 classifyPrimaryCells_musMusculus.py
+```
+This script will output two files for each study:
+- **results/ccAF_results_\*.csv** - a table where the cells are rows and the columns are meta-information about the cells and 'Predictions', which are the predicted ccAF labels. The asterisk will be replaced with the name of the study:  Nowakowski_norm, HECK293T, and GSE103322.
+- **results/table1_\*.csv** - a confusion matrix of counts for each study. The asterisk will be replaced with the name of the study:  Nowakowski_norm, HECK293T, and GSE103322.
 
 #### 9. Classify glioma scRNA-seq datasets
-classifyPrimaryCells_gliomas.py
+We classified three human scRNA-seq studies:
+    1. [Noakowski et al., 2017](https://pubmed.ncbi.nlm.nih.gov/29217575/) - allowed us to investigate how Neural G0 might arise during mammalian development by applying the ccAF to data from the developing human telencephalon.
+    2. [HEK293T](https://support.10xgenomics.com/single-cell-gene-expression/datasets/3.0.2/5k_hgmm_v3_nextgem) - 3,468 HEK293T cells from a barnyard assay conducted by 10X.
+    3. [Puram et al., 2017](head and neck squamous cell carcinoma (HNSCC) tumors) - scRNA-seq from head and neck squamous cell carcinoma (HNSCC) tumors (GSE103322).
+```console
+root@ef02b3a45938:/files/U5_hNSC_Neural_G0# python3 classifyPrimaryCells_gliomas.py
+```
+This script will output two files for each study:
+- **results/ccAF_results_\*.csv** - a table where the cells are rows and the columns are meta-information about the cells and 'Predictions', which are the predicted ccAF labels. The asterisk will be replaced with the name of the study:  Nowakowski_norm, HECK293T, and GSE103322.
+- **results/table1_\*.csv** - a confusion matrix of counts for each study. The asterisk will be replaced with the name of the study:  Nowakowski_norm, HECK293T, and GSE103322.
+
 
 ### Contact
 For issues or comments please contact:  [Chris Plaisier](mailto:plaisier@asu.edu)
