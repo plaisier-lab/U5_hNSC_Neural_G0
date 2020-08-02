@@ -10,7 +10,7 @@
 - **[Docker container](#docker-container)**
 - **[Aanalyses](#Analyses)**
     1. **[Identification of cell cycle phases](#1-identification-of-cell-cycle-phases)**
-    2. **[Resolving the flow of cells through the cell cycle using RNA velocity](2-resolving-the-flow-of-cells-through-the-cell-cycle-using-rna-velocity)
+    2. **[Resolving the flow of cells through the cell cycle using RNA velocity](2-resolving-the-flow-of-cells-through-the-cell-cycle-using-rna-velocity)**
     3. **[Pepare data for building classifier](#3-pepare-data-for-building-classifier)**
     4. **[Build classifier: 100-fold cross-validation](#4-build-classifier-100-fold-cross-validation)**
     5. **[Sensitivity analysis](#5-sensitivity-analysis)**
@@ -199,7 +199,19 @@ This script will output:
 - Three hypergeometric p-values for overlaps with YAP target genes which are printed out to the console.
 
 #### 2. Resolving the flow of cells through the cell cycle using RNA velocity 
-**TODO** scVelo etc.
+We added directionality to the edges using RNA velocity which computes the ratio of unspliced to spliced transcripts and infers the likely trajectory of cells through a two-dimensional single cell embedding, e.g. tSNE. The RNA velocity trajectories delineate the cell cycle in the expected orientation. First, we use velocyto to realign the transcriptome and tabulate spliced and unspliced transcript counts for each gene (we provide the result of this and not the raw data and genome build from 10X are very large [genome build used from cellranger](https://support.10xgenomics.com/single-cell-gene-expression/software/release-notes/build#hg19_3.0.0)):
+```console
+root@ef02b3a45938:/files/U5_hNSC_Neural_G0# velocyto run10x -m hg19_rmsk.gtf WT genes.gtf
+```
+This analysis will output:
+ - U5_velocyto.loom - a loom file with the matrix of spliced and unspliced reads for each gene.
+ 
+Then, we use scvelo to take in the unsplied and spliced transcript counts and compute the RNA velocities and stream lines.
+```console
+root@ef02b3a45938:/files/U5_hNSC_Neural_G0# python3 scvelo_analysis.py
+```
+This script will output:
+- ccAdata_velocity_stream_tsne.png - tSNE embeddings with RNA velocity stream lines.
 
 #### 3. Pepare data for building classifier
 We faciliatate further analysis in Python by converting the 
