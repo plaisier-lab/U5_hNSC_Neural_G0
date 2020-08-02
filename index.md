@@ -30,10 +30,14 @@ In depth knowledge of the cellular states associated with normal and disease tis
 ### Instructions to setup data and code for recreating analyses
 In order to run the software and scripts you will need to setup a specific directory structure and download all the data and scripts. Here are the instructions to setup things up:
 1. Clone the [U5_hNSC_Neural_G0 repository](https://github.com/plaisier-lab/U5_hNSC_Neural_G0/)
-```console
+```shell
 git clone https://github.com/plaisier-lab/U5_hNSC_Neural_G0.git
 ```
 2. Make a "data" folder inside the U5_hNSC_Neural_G0 folder
+```shell
+cd U5_hNSC_Neural_G0
+mkdir data
+```
 3. Download (and unzip for zip files) all files from [figshare](https://figshare.com/projects/Neural_G0_a_quiescent-like_state_found_in_neuroepithelial-derived_cells_and_glioma/86939):
     - [U5_hNSC.zip](https://figshare.com/articles/dataset/U5_hNSC_zip/12751082) (needs to be unzipped) - contains all the U5 hNSC scRNA-seq datasets as output from cellranger.
     - [ccAF_1536_smaller.pkl](https://figshare.com/articles/software/ccAF_1536_smaller_pkl/12751058) (does not need to be unzipped) - the ccAF ACTINN loadings for classification of cell cycle phases for cells or transcriptome profiles.
@@ -41,7 +45,15 @@ git clone https://github.com/plaisier-lab/U5_hNSC_Neural_G0.git
     - [forClassification.zip](https://figshare.com/articles/dataset/forClassification_zip/12751079) (needs to be unzipped) - loom data files that were classified using ccAF.
     - [ssGSEA.GBM.classification.zip](https://figshare.com/articles/dataset/ssGSEA_GBM_classification_zip/12751076) (needs to be unzipped) - subtype classification results for all glioma datasets.
     - [cellcycle_int_integrated.loom](https://figshare.com/articles/dataset/cellcycle_int_integrated_loom/12751055) (does not need to be unzipped) - U5 hNSC data as a loom file that was used to build the ccAF classifier.
-
+```shell
+wget https://figshare.com/articles/dataset/U5_hNSC_zip/12751082
+wget https://figshare.com/articles/software/ccAF_1536_smaller_pkl/12751058
+wget https://figshare.com/articles/dataset/geneConversions_zip/12751073
+wget https://figshare.com/articles/dataset/forClassification_zip/12751079
+wget https://figshare.com/articles/dataset/ssGSEA_GBM_classification_zip/12751076
+wget https://figshare.com/articles/dataset/cellcycle_int_integrated_loom/12751055
+unzip U5_hNSC.zip geneConversions.zip forClassification.zip ssGSEA.GBM.classification.zip
+```
 
 #### Directory structure
 After downloading and unzipping the files the directory structure should look like this:
@@ -142,18 +154,26 @@ After downloading and unzipping the files the directory structure should look li
 |   +-- Whitfield_classification_ACTINN_analysis.py
 ```
 
-The results directory will hold the output from analysis scripts.
+Now make a results directory to hold the output from analysis scripts:
+```shell
+mkdir results
+```
 
 ### Docker container
-We facilitate the use of our code and data by providing a Docker Hub container [cplaisier/scrna_seq_velocity](https://hub.docker.com/r/cplaisier/scrna_seq_velocity) which has all the dependencies and libraries to run the scripts. Please [install Docker](https://docs.docker.com/get-docker/) and then from the command line run:
-```console
+We facilitate the use of our code and data by providing a Docker Hub container [cplaisier/scrna_seq_velocity](https://hub.docker.com/r/cplaisier/scrna_seq_velocity) which has all the dependencies and libraries to run the scripts. To see how the Docker container is configured plaese refer to the [Dockerfile](https://github.com/plaisier-lab/docker_scRNA_seq_velocity/blob/master/Dockerfile). Please [install Docker](https://docs.docker.com/get-docker/) and then from the command line run:
+```shell
 docker pull cplaisier/scrna_seq_velocity
 ```
 Then run the Docker container using the following command (replace <the directory holding U5_hNSC_Neural_G0> with the directory where you have cloned the U5_hNSC_Neural_G0 repository):
-```console
+```shell
 docker run -it -v '<the directory holding U5_hNSC_Neural_G0>:/files' cplaisier/scrna_seq_velocity
 ```
-This will start the Docker container and should 
+This will start the Docker container in interactive mode and will leave you at a command prompt. You will then want to change directory to '/files/U5_hNSC_Neural_G0' (note the name of the container ef02b3a45938 will likely be different for your instance):
+```console
+root@ef02b3a45938:/tmp/samtools-1.10# cd /files/U5_hNSC_Neural_G0
+root@ef02b3a45938:/files/U5_hNSC_Neural_G0# 
+```
+If you are able to change to the 'U5_hNSC_Neual_G0 directory' you should be ready to move on to the **Analyses** below.
 
 ### Analyses
 The order of analyses in this study and the details of each analysis are described below:
