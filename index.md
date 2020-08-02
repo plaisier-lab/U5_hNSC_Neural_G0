@@ -10,7 +10,7 @@
 - **[Docker container](#docker-container)**
 - **[Aanalyses](#Analyses)**
     1. **[Identification of cell cycle phases](#1-identification-of-cell-cycle-phases)**
-    2. **[Resolving the flow of cells through the cell cycle using RNA velocity](2-resolving-the-flow-of-cells-through-the-cell-cycle-using-rna-velocity)**
+    2. **[Resolving the flow of cells through the cell cycle using RNA velocity](#2-resolving-the-flow-of-cells-through-the-cell-cycle-using-rna-velocity)**
     3. **[Pepare data for building classifier](#3-pepare-data-for-building-classifier)**
     4. **[Build classifier: 100-fold cross-validation](#4-build-classifier-100-fold-cross-validation)**
     5. **[Sensitivity analysis](#5-sensitivity-analysis)**
