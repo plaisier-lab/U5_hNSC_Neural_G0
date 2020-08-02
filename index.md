@@ -188,9 +188,11 @@ The order of analyses in this study and the details of each analysis are describ
 > Once this portion of the analysis is completed please close the Docker instance by typing 'exit' into the console until you return to your base operating system. Then restart the Docker instance as described above.
 
 Using scRNA-seq we profiled 5,973 actively dividing U5-hNSCs (Bressan et al, 2017) to identify the single-cell gene expression states corresponding to cell cycle phases with a focus on G0/G1 subpopulations. This will take in the scRNA-seq data from the 'data/U5_hNSC' directory where the 10X cellranger outputs for the U5 hNSCs are stored.
+
 ```console
 root@ef02b3a45938:/files/U5_hNSC_Neural_G0# Rscript U5_hNSC_scRNA_seq_Analysis.R
 ```
+
 This script will output:
 - **results/tsne_cell_embeddings_Perplexity_26.csv** - TSNE embeddings for use in later plots.
 - **results/eightClusters_WT_sgTAOK1.csv** - marker genes that discriminate between U5 hNSC cell cycle clusters.
@@ -200,24 +202,30 @@ This script will output:
 
 #### 2. Resolving the flow of cells through the cell cycle using RNA velocity 
 We added directionality to the edges using RNA velocity which computes the ratio of unspliced to spliced transcripts and infers the likely trajectory of cells through a two-dimensional single cell embedding, e.g. tSNE. The RNA velocity trajectories delineate the cell cycle in the expected orientation. First, we use velocyto to realign the transcriptome and tabulate spliced and unspliced transcript counts for each gene (we provide the result of this and not the raw data and genome build from 10X are very large [genome build used from cellranger](https://support.10xgenomics.com/single-cell-gene-expression/software/release-notes/build#hg19_3.0.0)):
+
 ```console
 root@ef02b3a45938:/files/U5_hNSC_Neural_G0# velocyto run10x -m hg19_rmsk.gtf WT genes.gtf
 ```
+
 This analysis will output:
  - **data/U5_hNSC/WT/U5_velocyto.loom** - a loom file with the matrix of spliced and unspliced reads for each gene.
  
 Then, we use scvelo to take in the unsplied and spliced transcript counts and compute the RNA velocities and stream lines.
+
 ```console
 root@ef02b3a45938:/files/U5_hNSC_Neural_G0# python3 scvelo_analysis.py
 ```
+
 This script will output:
 - **results/ccAdata_velocity_stream_tsne.png** - tSNE embeddings with RNA velocity stream lines.
 
 #### 3. Pepare data for building classifier
 We faciliatate further analysis in Python by converting the WT U5 hNSC data into a loom file:
+
 ```console
 root@ef02b3a45938:/files/U5_hNSC_Neural_G0# Rscript converting_to_loom.R
 ```
+
 This script will output:
 - **results/highlyVarGenes_WT_sgTAOK1_1584.csv** - list of the overlapping top 2,000 highly varaiable genes from UT and sgTAOK1.
 - **results/cellcycle_int_integrated.loom** - loom file used to construct the ccAF classifier.
@@ -228,10 +236,13 @@ We used the hNSC scRNA-seq data to build a cell cycle classifier. We tested four
 > 2. [Random Forest (RF)](https://scikit-learn.org/stable/modules/generated/sklearn.ensemble.RandomForestClassifier.html)
 > 3. scRNA-seq optimized [K-Nearest Neighbors (KNN)](https://pubmed.ncbi.nlm.nih.gov/29409532)
 > 4. scRNA-seq optimized [ACTINN Neural Network (NN) method](https://pubmed.ncbi.nlm.nih.gov/31359028).
+
 We selected the 1,536 most highly variable genes in the U5-hNSC scRNA-seq profiles as the training dataset for the classifier. We then used 100-fold cross-validation (CV) to determine the best method:
+
 ```console
 root@ef02b3a45938:/files/U5_hNSC_Neural_G0# python3 cvClassification_FullAnalysis.py
 ```
+
 This script will output two files for each method tested:
 - **results/\<method\>/ccAF_CV_results.csv** - The true labels, and predicted labels for the test sets from each cross-valdiation iteration. The \<method\> will be replaced with the name of the method:  SVMrej, RF, KNN, and ACTINN.
 - **results/\<method\>/CV_classification_report.csv** - Classification reports that have F1 scores and other metrics for classifier quality control. The \<method\> will be replaced with the name of the method:  SVMrej, RF, KNN, and ACTINN.
@@ -254,21 +265,29 @@ This script will output:
 
 #### 5. Sensitivity analysis
 A major issue in scRNA-seq studies is that the number of genes detected is heavily dependent upon sequencing depth, and missing gene information is a commonplace in scRNA-seq studies. Therefore we conducted a sensitivity analysis to determine the effect of randomly removing an increasing percentage of genes.
+
 ```console
 root@ef02b3a45938:/files/U5_hNSC_Neural_G0# python3 sensitivityAnalysis.py
 ```
+
 This script will output:
 - **results/SensitivityAnalysis/ccAF_CV_sensitivity_analysis.csv** - The true labels, and predicted labels for the test sets from each cross-valdiation iteration.
 - **results/SensitivityAnalysis/ccAF_CV_sensitivity_analysis_boxplot.pdf** - Boxplot showing how increasing amounts of missing genes affects the error rate of the ccAF classifier.
 
 #### 6. Whitfield et al., 2002 gold-standard classification
-[SAM FILL THIS IN]
-[Whitfield et al., 2002](https://pubmed.ncbi.nlm.nih.gov/12058064/) - gold-standard dataset of 1,134 most cyclic genes was used to validate S & M phases from ccAF (http://genome-www.stanford.edu/Human-CellCycle/HeLa/).
+We validated S and M phase classifications by appling the ccAF classifier to a gold standard cell-cycle synchronized time-series dataset from HeLa cells with simultaneous characterization of transcriptome profiles and experimental determination of whether the cells were in S or M phase at each time point:
+> [Whitfield et al., 2002](https://pubmed.ncbi.nlm.nih.gov/12058064/) - gold-standard dataset of 1,134 most cyclic genes was used to validate S & M phases from ccAF (http://genome-www.stanford.edu/Human-CellCycle/HeLa/).
+
 ```console
 root@ef02b3a45938:/files/U5_hNSC_Neural_G0# python3 Whitfield_classification_ACTINN_analysis.py
 ```
+
 This script will output:
-- **results/???** - ???.
+- **results/Whitfield/ACTINN_results_Whitfield_1134_quantile.csv** - The true labels, and predicted labels for the test sets from each cross-valdiation iteration.
+- **results/Whitfield/ACTINN_classification_report_Whitfield_1134_quantile.csv** - Classification reports that have F1 scores and other metrics for classifier quality control.
+- **results/Whitfield/plots/F1_scores_for_each_state_Whitfield_1134_quantile.pdf** - A boxplot of each classifier method stratified by cell cycle state.
+- **results/Whitfield/plots/F1_scores_for_each_state_Whitfield_1134_quantile_2.pdf** - A boxplot of each cell cycle state stratified by classifier method.
+- **results/Whitfield/plots/heatmapsOfWhitfield_1134_quantile.csv** - Recreating figure 2 from Whitfield et al., 2002 with ccAF cell cycle phase classification.
 
 #### 7. Classify human scRNA-seq datasets
 We classified three human scRNA-seq studies:
@@ -276,17 +295,21 @@ We classified three human scRNA-seq studies:
 > 2. [HEK293T](https://support.10xgenomics.com/single-cell-gene-expression/datasets/3.0.2/5k_hgmm_v3_nextgem) - 3,468 HEK293T cells from a barnyard assay conducted by 10X.
 > 3. [Puram et al., 2017](https://pubmed.ncbi.nlm.nih.gov/29198524/) - scRNA-seq from head and neck squamous cell carcinoma (HNSCC) tumors (GSE103322).
 Run this command to classify the cells from these human scRNA-seq studies:
+
 ```console
 root@ef02b3a45938:/files/U5_hNSC_Neural_G0# python3 classifyPrimaryCells_homoSapiens.py
 ```
+
 This script will output two files for each study:
 - **results/ccAF_results_\*.csv** - a table where the cells are rows and the columns are meta-information about the cells and 'Predictions', which are the predicted ccAF labels. The asterisk will be replaced with the name of the study:  Nowakowski_norm, HECK293T, and GSE103322.
 - **results/table1_\*.csv** - a confusion matrix of counts for each study. The asterisk will be replaced with the name of the study:  Nowakowski_norm, HECK293T, and GSE103322.
 
 The Nowakowski et al., 2017 results were then plotted to be added to figure 2:
+
 ```console
 root@ef02b3a45938:/files/U5_hNSC_Neural_G0# python3 plotNowakowski.py
 ```
+
 This script will output two files for each study:
 - **results/results/Nowakowski_ccAF_plot_Refined.pdf** - a stacked barplot that shows how the cells form each cell type in Nowakowski et al., 2017 are classified by ccAF.
 
@@ -295,9 +318,11 @@ We classified two mouse scRNA-seq studies:
 > 1. [Llorens-Bobadilla et al., 2015](https://www.ncbi.nlm.nih.gov/pubmed/26235341) - defined quiescent neural stem cell (qNSC) and active (aNSC) subpopulations from adult mouse subbentricular zone (GSE67833).
 > 2. [Dulken et al., 2017](https://www.ncbi.nlm.nih.gov/pubmed/28099854) - perform single cell transcriptomics on neural stem cells (NSCs) from adult mice (PRJNA324289).
 Run this command to classify the cells from these mouse scRNA-seq studies:
+
 ```console
 root@ef02b3a45938:/files/U5_hNSC_Neural_G0# python3 classifyPrimaryCells_musMusculus.py
 ```
+
 This script will output two files for each study:
 - **results/ccAF_results_\*.csv** - a table where the cells are rows and the columns are meta-information about the cells and 'Predictions', which are the predicted ccAF labels. The asterisk will be replaced with the name of the study:  GSE67833 and PRJNA324289.
 - **results/table1_\*.csv** - a confusion matrix of counts for each study. The asterisk will be replaced with the name of the study:  GSE67833 and PRJNA324289.
@@ -311,10 +336,13 @@ We classified seven human scRNA-seq studies:
 > 5. [Bhaduri et al., 2020](https://pubmed.ncbi.nlm.nih.gov/31901251/) - grade IV glioblastomas that are IDH wild-type (PRJNA579593).
 > 6. [Wang et al., 2020](https://pubmed.ncbi.nlm.nih.gov/32004492/) - grade IV glioblastomas that are IDH wild-type (GSE139448).
 > 7. [Filbin et al., 2018](https://pubmed.ncbi.nlm.nih.gov/29674595/) - diffuse midline glioma with H3K27M (GSE102130)
+
 Run this command to classify the cells from these glioma scRNA-seq studies:
+
 ```console
 root@ef02b3a45938:/files/U5_hNSC_Neural_G0# python3 classifyPrimaryCells_gliomas.py
 ```
+
 This script will output two files for each study:
 - **results/ccAF_results_\*.csv** - a table where the cells are rows and the columns are meta-information about the cells and 'Predictions', which are the predicted ccAF labels. The asterisk will be replaced with the name of the study:  GSE70630, GSE89567, GSE854465_all, GSE131928_10X, GSE131928_Smartseq2, Bhaduri, GSE139448, GSE102130.
 - **results/table1_\*.csv** - a confusion matrix of counts for each study. The asterisk will be replaced with the name of the study:  GSE70630, GSE89567, GSE854465_all, GSE131928_10X, GSE131928_Smartseq2, Bhaduri, GSE139448, GSE102130.
