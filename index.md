@@ -122,6 +122,9 @@ After downloading and unzipping the files the directory structure should look li
 |   |   |   |   |   |   +-- barcodes.tsv
 |   |   |   |   |   |   +-- genes.tsv
 |   |   |   |   |   |   +-- matrix.mtx
+|   |   |   |   |   +-- tsne_cell_embeddings_Perplexity_26.csv
+|   |   |   |   |   +-- U5_all_v3.loom
+|   |   |   |   |   +-- U5_velocyto.loom
 |   |   |   +-- WT_CDTplus
 |   |   |   |   +-- filtered_gene_bc_matrices
 |   |   |   |   |   +-- hg19
@@ -130,16 +133,16 @@ After downloading and unzipping the files the directory structure should look li
 |   |   |   |   |   |   +-- matrix.mtx
 |   |   +-- Whitfield
 |   |   |   +-- data
-|   |   |   |   +-- whitfield_dataPlusScores_6_30_2020_SHAKE.T_1334.csv
-|   |   |   |   +-- whitfield_dataPlusScores_6_30_2020_SHAKE_1334.csv
-|   |   |   |   +-- whitfield_dataPlusScores_6_30_2020_TN.T_1334.csv
-|   |   |   |   +-- whitfield_dataPlusScores_6_30_2020_TN_1334.csv
-|   |   |   |   +-- whitfield_dataPlusScores_6_30_2020_TT1.T_1334.csv
-|   |   |   |   +-- whitfield_dataPlusScores_6_30_2020_TT1_1334.csv
-|   |   |   |   +-- whitfield_dataPlusScores_6_30_2020_TT2.T_1334.csv
-|   |   |   |   +-- whitfield_dataPlusScores_6_30_2020_TT2_1334.csv
-|   |   |   |   +-- whitfield_dataPlusScores_6_30_2020_TT3.T_1334.csv
-|   |   |   |   +-- whitfield_dataPlusScores_6_30_2020_TT3_1334.csv
+|   |   |   |   +-- whitfield_dataPlusScores_6_30_2020_SHAKE.T_1134.csv
+|   |   |   |   +-- whitfield_dataPlusScores_6_30_2020_SHAKE_1134.csv
+|   |   |   |   +-- whitfield_dataPlusScores_6_30_2020_TN.T_1134.csv
+|   |   |   |   +-- whitfield_dataPlusScores_6_30_2020_TN_1134.csv
+|   |   |   |   +-- whitfield_dataPlusScores_6_30_2020_TT1.T_1134.csv
+|   |   |   |   +-- whitfield_dataPlusScores_6_30_2020_TT1_1134.csv
+|   |   |   |   +-- whitfield_dataPlusScores_6_30_2020_TT2.T_1134.csv
+|   |   |   |   +-- whitfield_dataPlusScores_6_30_2020_TT2_1134.csv
+|   |   |   |   +-- whitfield_dataPlusScores_6_30_2020_TT3.T_1134.csv
+|   |   |   |   +-- whitfield_dataPlusScores_6_30_2020_TT3_1134.csv
 |   |   |   +-- markergenes_ForPlotting.csv
 |   |   |   +-- metaInformation.csv
 |   +-- LICENSE
