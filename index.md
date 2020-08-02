@@ -289,7 +289,7 @@ This script will output two files for each study:
 - **results/results/Nowakowski_ccAF_plot_Refined.pdf** - a stacked barplot that shows how the cells form each cell type in Nowakowski et al., 2017 are classified by ccAF.
 
 #### 8. Classify mouse scRNA-seq datasets
-We classified three mouse scRNA-seq studies:
+We classified two mouse scRNA-seq studies:
 > 1. [Llorens-Bobadilla et al., 2015](https://www.ncbi.nlm.nih.gov/pubmed/26235341) - defined quiescent neural stem cell (qNSC) and active (aNSC) subpopulations from adult mouse subbentricular zone (GSE67833).
 > 2. [Dulken et al., 2017](https://www.ncbi.nlm.nih.gov/pubmed/28099854) - perform single cell transcriptomics on neural stem cells (NSCs) from adult mice (PRJNA324289).
 Run this command to classify the cells from these mouse scRNA-seq studies:
