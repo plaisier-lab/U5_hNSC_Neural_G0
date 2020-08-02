@@ -2,6 +2,11 @@
 
 ![UMAPs](umaps.gif)
 
+###Table of Contents
+- [Abstract](#abstract)
+- [Data and code availability](#data-and-code-availability)
+- [Instructions to setup data and code for recreating analyses](#instructions-to-setup-data-and-code-for-recreating-analyses)
+
 ### Abstract
 In depth knowledge of the cellular states associated with normal and disease tissue homeostasis is critical for understanding disease etiology and uncovering therapeutic opportunities. Here, we used single cell RNA-seq to survey the cellular states of neuroepithelial-derived cells in cortical and neurogenic regions of developing and adult mammalian brain to compare with 38,474 cells obtained from 59 human gliomas, as well as pluripotent ESCs, endothelial cells, CD45+ immune cells, and non-CNS cancers. This analysis suggests that a significant portion of neuroepithelial-derived stem and progenitor cells and glioma cells that are not in G2/M or S phase exist in two states: G1 or Neural G0, defined by expression of certain neuro-developmental genes. In gliomas, higher overall Neural G0 gene expression is significantly associated with less aggressive gliomas, IDH1 mutation, and extended patient survival, while also anti-correlated with cell cycle gene expression. Knockout of genes associated with the Hippo/Yap and p53 pathways diminished Neural G0 in vitro, resulting in faster G1 transit, down regulation of quiescence-associated markers, and loss of Neural G0 gene expression. Thus, Neural G0 is a dynamic cellular state required for indolent cell cycles in neural-specified stem and progenitors poised for cell division. As a result, Neural G0 occupancy may be an important determinant of glioma tumor progression.
 
@@ -14,105 +19,107 @@ In order to run the software and scripts you will need to setup a specific direc
 2. Make a data folder inside the U5_hNSC_Neural_G0 folder
 3. Download (and unzip for zip files) all files from [figshare](https://figshare.com/projects/Neural_G0_a_quiescent-like_state_found_in_neuroepithelial-derived_cells_and_glioma/86939)
 
-Here is what the fila directory structure should look like:
+Here is what the directory structure should look like:
 
 ```
 .
 +-- U5_hNSC_Neural_G0
-    +-- actinn.py
-    +-- calculatingErrors.py
-    +-- calculatingErrors_CV.py
-    +-- calculatingErrors_Whitfield.py
-    +-- classifiersV3.py
-    +-- classifyPrimaryCells_gliomas.py
-    +-- classifyPrimaryCells_homoSapeins.py
-    +-- classifyPrimaryCells_musMusculus.py
-    +-- converting_to_loom.R
-    +-- cvClassification_FullAnalysis.py
-    +-- data
-        +-- ccAF_1536_smaller.pkl
-        +-- cellcycle_int_integrated.loom
-        +-- forClassification
-            +-- gliomas
-                +-- Bhaduri.loom
-                +-- GSE102130.loom
-                +-- GSE131928_10X.loom
-                +-- GSE131928_Smartseq2.loom
-                +-- GSE139448.loom
-                +-- GSE70630.loom
-                +-- GSE84465.loom
-                +-- GSE84465_all.loom
-                +-- GSE89567.loom
-            +-- GSE103322.loom
-            +-- GSE67833.loom
-            +-- HEK293T.loom
-            +-- Nowakowski_norm.loom
-            +-- PRJNA324289.loom
-        +-- geneConversions
-            +-- ensembl_entrez.csv
-            +-- hgnc_geneSymbols.txt
-            +-- hgnc_geneSymbols_ensmbl.txt
-            +-- human_hgnc_mouse_mgi.csv
-            +-- mart_export.txt
-        +-- highlyVarGenes_WT_sgTAOK1_1584.csv
-        +-- ssGSEA.GBM.classification
-            +-- p_result_Bhaduri_2019.gct.txt
-            +-- p_result_GSE102130.gct.txt
-            +-- p_result_GSE131928_GSM3828672.gct.txt
-            +-- p_result_GSE131928_GSM3828673_1.gct.txt
-            +-- p_result_GSE131928_GSM3828673_2.gct.txt
-            +-- p_result_GSE139448.gct.txt
-            +-- p_result_GSE70630.gct.txt
-            +-- p_result_GSE84465.gct.txt
-            +-- p_result_GSE89567.gct.txt
-            +-- res_All_GSE131928.csv
-        +-- U5_hNSC
-            +-- sgTAOK1
-                +-- filtered_gene_bc_matrices
-                    +-- hg19
-                        +-- barcodes.tsv
-                        +-- genes.tsv
-                        +-- matrix.mtx
-            +-- WT
-                +-- filtered_gene_bc_matrices
-                    +-- hg19
-                        +-- barcodes.tsv
-                        +-- genes.tsv
-                        +-- matrix.mtx
-            +-- WT_CDTplus
-                +-- filtered_gene_bc_matrices
-                    +-- hg19
-                        +-- barcodes.tsv
-                        +-- genes.tsv
-                        +-- matrix.mtx
-        +-- Whitfield
-            +-- data
-                +-- whitfield_dataPlusScores_6_30_2020_SHAKE.T_1334.csv
-                +-- whitfield_dataPlusScores_6_30_2020_SHAKE_1334.csv
-                +-- whitfield_dataPlusScores_6_30_2020_TN.T_1334.csv
-                +-- whitfield_dataPlusScores_6_30_2020_TN_1334.csv
-                +-- whitfield_dataPlusScores_6_30_2020_TT1.T_1334.csv
-                +-- whitfield_dataPlusScores_6_30_2020_TT1_1334.csv
-                +-- whitfield_dataPlusScores_6_30_2020_TT2.T_1334.csv
-                +-- whitfield_dataPlusScores_6_30_2020_TT2_1334.csv
-                +-- whitfield_dataPlusScores_6_30_2020_TT3.T_1334.csv
-                +-- whitfield_dataPlusScores_6_30_2020_TT3_1334.csv
-            +-- markergenes_ForPlotting.csv
-            +-- metaInformation.csv
-    +-- LICENSE
-    +-- makeDatasetsForClassification.R
-    +-- plotNowakowski.py
-    +-- plottingClassifiers.py
-    +-- README.md
-    +-- results
-    +-- sensitivityAnalysis_plot.py
-    +-- sensitivityAnalysis_run.py
-    +-- ssgse.GBM.classification
-    +-- U5_hNSC_scRNA_seq_Analysis.R
-    +-- Whitfield_classification_ACTINN_analysis.py
+|   +-- actinn.py
+|   +-- calculatingErrors.py
+|   +-- calculatingErrors_CV.py
+|   +-- calculatingErrors_Whitfield.py
+|   +-- classifiersV3.py
+|   +-- classifyPrimaryCells_gliomas.py
+|   +-- classifyPrimaryCells_homoSapeins.py
+|   +-- classifyPrimaryCells_musMusculus.py
+|   +-- converting_to_loom.R
+|   +-- cvClassification_FullAnalysis.py
+|   +-- data
+|   |   +-- ccAF_1536_smaller.pkl
+|   |   +-- cellcycle_int_integrated.loom
+|   |   +-- forClassification
+|   |   |   +-- gliomas
+|   |   |   |   +-- Bhaduri.loom
+|   |   |   |   +-- GSE102130.loom
+|   |   |   |   +-- GSE131928_10X.loom
+|   |   |   |   +-- GSE131928_Smartseq2.loom
+|   |   |   |   +-- GSE139448.loom
+|   |   |   |   +-- GSE70630.loom
+|   |   |   |   +-- GSE84465.loom
+|   |   |   |   +-- GSE84465_all.loom
+|   |   |   |   +-- GSE89567.loom
+|   |   |   +-- GSE103322.loom
+|   |   |   +-- GSE67833.loom
+|   |   |   +-- HEK293T.loom
+|   |   |   +-- Nowakowski_norm.loom
+|   |   |   +-- PRJNA324289.loom
+|   |   +-- geneConversions
+|   |   |   +-- ensembl_entrez.csv
+|   |   |   +-- hgnc_geneSymbols.txt
+|   |   |   +-- hgnc_geneSymbols_ensmbl.txt
+|   |   |   +-- human_hgnc_mouse_mgi.csv
+|   |   |   +-- mart_export.txt
+|   |   +-- highlyVarGenes_WT_sgTAOK1_1584.csv
+|   |   +-- ssGSEA.GBM.classification
+|   |   |   +-- p_result_Bhaduri_2019.gct.txt
+|   |   |   +-- p_result_GSE102130.gct.txt
+|   |   |   +-- p_result_GSE131928_GSM3828672.gct.txt
+|   |   |   +-- p_result_GSE131928_GSM3828673_1.gct.txt
+|   |   |   +-- p_result_GSE131928_GSM3828673_2.gct.txt
+|   |   |   +-- p_result_GSE139448.gct.txt
+|   |   |   +-- p_result_GSE70630.gct.txt
+|   |   |   +-- p_result_GSE84465.gct.txt
+|   |   |   +-- p_result_GSE89567.gct.txt
+|   |   |   +-- res_All_GSE131928.csv
+|   |   +-- U5_hNSC
+|   |   |   +-- sgTAOK1
+|   |   |   |   +-- filtered_gene_bc_matrices
+|   |   |   |   |   +-- hg19
+|   |   |   |   |   |   +-- barcodes.tsv
+|   |   |   |   |   |   +-- genes.tsv
+|   |   |   |   |   |   +-- matrix.mtx
+|   |   |   +-- WT
+|   |   |   |   +-- filtered_gene_bc_matrices
+|   |   |   |   |   +-- hg19
+|   |   |   |   |   |   +-- barcodes.tsv
+|   |   |   |   |   |   +-- genes.tsv
+|   |   |   |   |   |   +-- matrix.mtx
+|   |   |   +-- WT_CDTplus
+|   |   |   |   +-- filtered_gene_bc_matrices
+|   |   |   |   |   +-- hg19
+|   |   |   |   |   |   +-- barcodes.tsv
+|   |   |   |   |   |   +-- genes.tsv
+|   |   |   |   |   |   +-- matrix.mtx
+|   |   +-- Whitfield
+|   |   |   +-- data
+|   |   |   |   +-- whitfield_dataPlusScores_6_30_2020_SHAKE.T_1334.csv
+|   |   |   |   +-- whitfield_dataPlusScores_6_30_2020_SHAKE_1334.csv
+|   |   |   |   +-- whitfield_dataPlusScores_6_30_2020_TN.T_1334.csv
+|   |   |   |   +-- whitfield_dataPlusScores_6_30_2020_TN_1334.csv
+|   |   |   |   +-- whitfield_dataPlusScores_6_30_2020_TT1.T_1334.csv
+|   |   |   |   +-- whitfield_dataPlusScores_6_30_2020_TT1_1334.csv
+|   |   |   |   +-- whitfield_dataPlusScores_6_30_2020_TT2.T_1334.csv
+|   |   |   |   +-- whitfield_dataPlusScores_6_30_2020_TT2_1334.csv
+|   |   |   |   +-- whitfield_dataPlusScores_6_30_2020_TT3.T_1334.csv
+|   |   |   |   +-- whitfield_dataPlusScores_6_30_2020_TT3_1334.csv
+|   |   |   +-- markergenes_ForPlotting.csv
+|   |   |   +-- metaInformation.csv
+|   +-- LICENSE
+|   +-- makeDatasetsForClassification.R
+|   +-- plotNowakowski.py
+|   +-- plottingClassifiers.py
+|   +-- README.md
+|   +-- results
+|   +-- sensitivityAnalysis_plot.py
+|   +-- sensitivityAnalysis_run.py
+|   +-- ssgse.GBM.classification
+|   +-- U5_hNSC_scRNA_seq_Analysis.R
+|   +-- Whitfield_classification_ACTINN_analysis.py
 ```
 
-#### Description of datafiles
+The results is a directory that will hold all the output from the scripts.
+
+#### Order of operations
 
 
 
