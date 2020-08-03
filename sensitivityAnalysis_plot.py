@@ -28,7 +28,7 @@ import seaborn as sns
 import matplotlib
 
 # Import data
-DF = pd.read_csv('method/ACTINN/ccAF_CV_sensitivity_analysis.csv')
+DF = pd.read_csv('results/SensitivityAnalysis/ccAF_CV_sensitivity_analysis.csv')
 del DF['Unnamed: 0']
 
 # Percentage of genes to test for cross-validation classification
@@ -67,5 +67,5 @@ b.axes.set_title("Cross Validation Sensitivity Analysis",fontsize=25)
 b.set_xlabel("Percent Genes",fontsize=25)
 b.set_ylabel("Error Rate",fontsize=25)
 b.tick_params(labelsize=18)
-plt.savefig('plots/ccAF_CV_sensitivity_analysis_plot_070220.png')
+plt.savefig('results/SensitivityAnalysis/ccAF_CV_sensitivity_analysis_boxplot.pdf')
 plt.clf()

@@ -67,7 +67,7 @@ def compute_whitfield_translation(whitfield_pred, conversion = {'M/Early G1':'M/
 with open('results/ACTINN/ccAF_1536_smaller.pkl','rb') as pklFile:
     ccAF1 = pickle.load(pklFile)
 
-g2e = pd.read_csv('data/Whitfield/geneConversions/ensembl_entrez.csv', index_col=1, header=0)
+g2e = pd.read_csv('data/geneConversions/ensembl_entrez.csv', index_col=1, header=0)
 g2e = g2e.loc[g2e.index.dropna()]
 g2e = g2e.loc[~g2e.index.duplicated()]
 
@@ -79,13 +79,13 @@ else:
     print("Directory already exists")
 
 # Load up whitfield dataset & incorporate ideal vector data from Figure 1 to meta
-whit1 = ['whitfield_dataPlusScores_6_30_2020_', '_1334.csv', '1334']
+whit1 = ['whitfield_dataPlusScores_6_30_2020_', '_1134.csv', '1134']
 mod1 = 'quantile'
 experiments = {'TT1':[0,12], 'TT2':[12,38], 'TT3':[38,86], 'TN':[86,105], 'SHAKE':[105,114]}
 whitfield = {}
 print(whit1, mod1)
 for exp1 in experiments:
-    whitfield[exp1] = sc.read_csv('data/Whitfield/'+whit1[0]+exp1+whit1[1], first_column_names=True).T
+    whitfield[exp1] = sc.read_csv('data/Whitfield/data/'+whit1[0]+exp1+whit1[1], first_column_names=True).T
     var_names = [str(g2e.loc[float(i),'Gene stable ID']) for i in whitfield[exp1].var_names if float(i) in g2e.index]
     whitfield[exp1] = whitfield[exp1][:,[True if float(i) in g2e.index else False for i in whitfield[exp1].var_names]]
     whitfield[exp1].var_names = pd.Index(var_names)

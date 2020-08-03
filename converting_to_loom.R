@@ -49,7 +49,6 @@ WT.markers = FindAllMarkers(WT, only.pos=F, min.pct=0.25, logfc.threshold = 0.2)
 WT_marker_genes_0_3 = (WT.markers %>% group_by(cluster) %>% filter(avg_logFC>0.3))$gene
 WT_marker_genes_0_5 = (WT.markers %>% group_by(cluster) %>% filter(avg_logFC>0.5))$gene
 WT_marker_gene_top50 = (WT.markers %>% group_by(cluster) %>% top_n(50,avg_logFC))$gene
-#as.loom(WT, assay='RNA', filename='WT_6_1_2020.loom')
 
 ## sgTAOK1
 taok1.data = Read10X(data.dir = "data/U5_hNSC/sgTAOK1/filtered_gene_bc_matrices/hg19/")
@@ -70,7 +69,6 @@ taok1.markers = FindAllMarkers(taok1, only.pos=F, min.pct=0.25, logfc.threshold 
 taok1_marker_genes_0_3 = (taok1.markers %>% group_by(cluster) %>% filter(avg_logFC>0.3))$gene
 taok1_marker_genes_0_5 = (taok1.markers %>% group_by(cluster) %>% filter(avg_logFC>0.5))$gene
 taok1_marker_gene_top50 = (taok1.markers %>% group_by(cluster) %>% top_n(50,avg_logFC))$gene
-#as.loom(taok1, assay='RNA', filename='sgTAOK1_6_1_2020.loom')
 
 ## Highly varaible gene list WT int sgTAOK1 (n = 1584), uses vst method
 hvg1 = intersect(WT@assays$RNA@var.features, taok1@assays$RNA@var.features)
@@ -80,5 +78,5 @@ write.csv(hvg1,'highlyVarGenes_WT_sgTAOK1_1584.csv')
 int_anchors = FindIntegrationAnchors(object.list = list(WT = WT, taok1 = taok1), dims=1:30, anchor.features = 10000)
 cellcycle_int_2 = IntegrateData(anchorset = int_anchors, dims = 1:30, features.to.integrate=unique(c(hvg1, mg1, mg2, mg3, hvg2, mg4, mg5, mg6, int_anchors@anchor.features)))
 DefaultAssay(cellcycle_int_2) = "integrated"
-as.loom(cellcycle_int_2, assay='integrated', filename='cellcycle_int_integrated_V3_6_18_2020.loom')
+as.loom(cellcycle_int_2, assay='integrated', filename='cellcycle_int_integrated.loom')
 

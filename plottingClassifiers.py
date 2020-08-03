@@ -32,7 +32,6 @@ else:
     print("Directory already exists")
 
 ## Load datasets and concatenate
-# 1536 dataset
 SVMrej_CR_1536 = pd.read_csv('results/SVMrej/CV_classification_report_1536.csv')
 NN_CR_1536 = pd.read_csv('results/ACTINN/CV_classification_report_1536.csv')
 RF_CR_1536 = pd.read_csv('results/RFpy/CV_classification_report_1536.csv')
@@ -47,7 +46,6 @@ CR_1536['Subset'] = 1536
 CR_1536.to_csv('results/cell_cycle_states_CV_stats.csv')
 
 ## Plot f1-score boxplot
-# 1536 dataset
 # hue = cell cycle state
 sns.set(style="darkgrid")
 fig, ax = plt.subplots(figsize=(20,10))

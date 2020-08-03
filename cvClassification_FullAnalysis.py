@@ -42,10 +42,10 @@ import classifiersV3 as cl
 
 # Load up loom file
 print('\nLoading data...')
-ccAF1_scanpy = sc.read_loom('data/cellcycle_int_integrated_V3_6_18_2020.loom')
+ccAF1_scanpy = sc.read_loom('data/cellcycle_int_integrated.loom')
 
 # Load up conversion file
-symEnsmbl = pd.read_csv('data/U5/filtered_gene_bc_matrices/hg19/genes.tsv', header = None, index_col=1, sep='\t')
+symEnsmbl = pd.read_csv('data/U5_hNSC/WT/filtered_gene_bc_matrices/hg19/genes.tsv', header = None, index_col=1, sep='\t')
 tmp1 = pd.Series(symEnsmbl.index)
 tmp1.loc[symEnsmbl.index.duplicated()] = [i+'.1' for i in symEnsmbl.loc[symEnsmbl.index.duplicated()].index]
 symEnsmbl.index = pd.Index(tmp1)
@@ -55,7 +55,7 @@ ccAF1_scanpy.var_names = pd.Index(symEnsmbl.loc[ccAF1_scanpy.var_names,0], name=
 ccAF1_scanpy.var_names_make_unique()
 
 # HGNC -> downlaoded from HGNC website (https://www.genenames.org/download/custom/)
-hgncEnsmbl = pd.read_csv('data/Whitfield/geneConversions/hgnc_geneSymbols_ensmbl.txt', index_col=1, header=0, sep='\t')
+hgncEnsmbl = pd.read_csv('data/geneConversions/hgnc_geneSymbols_ensmbl.txt', index_col=1, header=0, sep='\t')
 hgncEnsmbl = hgncEnsmbl.loc[~hgncEnsmbl['Ensembl ID(supplied by Ensembl)'].isnull()]
 
 ensmblHgnc = pd.Series(hgncEnsmbl.index)
@@ -78,7 +78,7 @@ for i in hgncEnsmbl.loc[~hgncEnsmbl['Alias symbols'].isnull()].index:
 #ccAF1_scanpy = ccAF1_scanpy[:,[True if i in hgncEnsmbl.index or i in hgncPrevEnsmbl or i in hgncAliasEnsmbl else False for i in ccAF1_scanpy.var_names]]
 #ccAF1_scanpy.var_names = pd.Index([str(int(i)) for i in converted])
 
-tmp1 = set(list(pd.read_csv('data/markerGenes/highlyVarGenes_WT_sgTAOK1_1584.csv', header = 0, index_col = 0).loc[:,'x']))
+tmp1 = set(list(pd.read_csv('data/highlyVarGenes_WT_sgTAOK1_1584.csv', header = 0, index_col = 0).loc[:,'x']))
 tmp2 = []
 missed = []
 for j in tmp1:
@@ -138,7 +138,7 @@ for k in range(nfolds):
 ### SVMrej CV ###
 #################
 
-if not exists('results/SVMrej/CV_classification_report_'+str(ccAF1_scanpy_mg1._n_vars)+'.csv'):
+if not exists('results/SVMrej/CV_classification_report.csv'):
     # SVMrej multiprocessable function
     def runSVMrej(params):
         print('SVMrej round '+str(params[0])+'...')
@@ -159,7 +159,7 @@ if not exists('results/SVMrej/CV_classification_report_'+str(ccAF1_scanpy_mg1._n
 
     # Dataframe of true labels, predictions, probabilities for all iterations
     DF = pd.DataFrame({'True Labels':truelab, 'Predictions':pred})
-    DF.to_csv('results/SVMrej/ccAF_CV_results_'+str(ccAF1_scanpy_mg1._n_vars)+'.csv')
+    DF.to_csv('results/SVMrej/ccAF_CV_results.csv')
 
     # Get classification report for each iteration
     performanceResults = []
@@ -171,7 +171,7 @@ if not exists('results/SVMrej/CV_classification_report_'+str(ccAF1_scanpy_mg1._n
     states1 = ['G1','G1/other','G2/M','Late G1','M/Early G1','Neural G0','S', 'S/G2']
     performDF = performDF.loc[[True if i in states1 else False for i in list(performDF.index)]]
     performDF['Classifier'] = 'SVMrej'
-    performDF.to_csv('results/SVMrej/CV_classification_report_'+str(ccAF1_scanpy_mg1._n_vars)+'.csv')
+    performDF.to_csv('results/SVMrej/CV_classification_report.csv')
 
 #############
 ### RF CV ###
@@ -274,6 +274,7 @@ if not exists('results/ACTINN/CV_classification_report_'+str(ccAF1_scanpy_mg1._n
     DF["Equal"] = comparison_column
     errorACTINN.append(DF['Equal'].value_counts(normalize=True))
 
+# Make ACTINN ccAF classifier using full dataset
 if not exists('results/ACTINN/ccAF_'+str(ccAF1_scanpy_mg1._n_vars)+'.pkl'):
     ACTINN = cl.Classifier_ACTINN(train = ccAF1_scanpy_mg1, label = 'clusts_named')
     with open('results/ACTINN/ccAF_'+ str(ccAF1_scanpy_mg1._n_vars)+ '.pkl', 'wb') as pklFile:
@@ -285,3 +286,4 @@ if not exists('results/ACTINN/ccAF_'+str(ccAF1_scanpy_mg1._n_vars)+'.pkl'):
 
 
 print(errorACTINN)
+

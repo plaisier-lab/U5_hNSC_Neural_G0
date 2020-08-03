@@ -31,13 +31,11 @@ import matplotlib.pyplot as plt
 
 # Load CV results and concatenate for error comparisons
 meths = ['SVMrej', 'RFpy', 'KNN', 'ACTINN']
-genes = [228, 298, 342, 439, 571, 738, 1584]
+genes = [1536]
 errors = pd.DataFrame(index=genes, columns=meths)
 for meth1 in meths:
     for gene1 in genes:
-        if not gene1 == 1584:
-            tmp1 = pd.read_csv('method/'+meth1+'/ccAF_CV_results_'+str(gene1)+'.csv', index_col=0, header=0)
-        else:
-            tmp1 = pd.read_csv('method/'+meth1+'/ccAF_CV_results_'+str(gene1)+'_2.csv', index_col=0, header=0)
+        tmp1 = pd.read_csv('results/'+meth1+'/ccAF_CV_results_'+str(gene1)+'.csv', index_col=0, header=0)
         errors.loc[gene1,meth1] = 1-sum(tmp1['True Labels']==tmp1['Predictions'])/tmp1.shape[0]
-errors.to_csv('errors_cross_validation.csv')
+    
+errors.to_csv('results/errors_cross_validation.csv')

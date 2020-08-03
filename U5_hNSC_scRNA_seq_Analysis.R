@@ -54,7 +54,6 @@ WT_CDTplus = AddMetaData(object = WT_CDTplus, metadata = percent.mito, col.name 
 WT_CDTplus = NormalizeData(object = WT_CDTplus)
 WT_CDTplus = FindVariableGenes(object = WT_CDTplus)
 WT_CDTplus = ScaleData(object = WT_CDTplus, vars.to.regress = c('percent.mito','nUMI'), genes.use = WT_CDTplus@var.genes, model.use = 'negbinom')
-as.loom(WT_CDTplus, assay='RNA', filename='WT_CDTplus.loom')
 
 ###############
 ### sgTAOK1 ###
@@ -91,14 +90,14 @@ cellcycle.combined = SetAllIdent(object = cellcycle.combined, id='clusts_named')
 
 # Make tSNE embeddings
 cellcycle.combined = RunTSNE(cellcycle.combined, reduction.use = "cca.aligned", dims.use = 1:20, do.fast = T, perplexity=26)
+pdf(paste('results/TSNE_perpelexity_26.pdf',sep=''))
+TSNEPlot(cellcycle.combined, cells.use=rownames(cellcycle.combined@meta.data)[cellcycle.combined@meta.data[,'pert']=='WT'], do.label=T, no.legend=T)
+dev.off()
 write.csv(cellcycle.combined@dr$tsne@cell.embeddings, 'results/tsne_cell_embeddings_Perplexity_26.csv')
 
 # Identify Markers
 cellcycle.markers = FindAllMarkers(cellcycle.combined)
 write.csv(cellcycle.markers,'results/eightClusters_WT_sgTAOK1.csv')
-
-# Write out loom file
-as.loom(cellcycle.combined, assay='RNA', filename='cellcycle_int_integrated.loom')
 
 
 ######################
@@ -120,10 +119,10 @@ g = graph.adjacency(
 rowSums(dist1<=240,na.rm=T)
 
 g = delete_edges(g, E(g)[which(E(g)$weight>240)])
-#plot(g)
 edgeweights = (1/(scale(E(g)$weight,center=F)^6))*3
+pdf('results/cellCycleNetwork.pdf')
 plot(g, layout=layout.fruchterman.reingold, edge.width=edgeweights)
-
+dev.off()
 
 #######################
 ## Enrichment of YAP ##

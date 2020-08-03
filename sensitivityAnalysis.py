@@ -1,5 +1,5 @@
 ##########################################################
-## ccAF:  sensitivityAnalysis_run.py                    ##
+## ccAF:  sensitivityAnalysis.py                        ##
 ##  ______     ______     __  __                        ##
 ## /\  __ \   /\  ___\   /\ \/\ \                       ##
 ## \ \  __ \  \ \___  \  \ \ \_\ \                      ##
@@ -122,7 +122,7 @@ for i in range(0,len(percs)):
 aggErrorDF = pd.concat(aggErrorACTINN, axis=0)
 aggErrorDF.columns = aggErrorDF.columns.map(str)
 
-## plot boxplot
+# Plot boxplot
 aggErrorDF.rename(columns={'False':'Error Rate', 'Percent': 'Percent Genes'}, inplace=True)
 aggErrorDF = aggErrorDF.drop(index = 'Equal_0.95')
 sns.set(style="darkgrid")

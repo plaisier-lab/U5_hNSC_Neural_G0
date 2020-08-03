@@ -80,6 +80,6 @@ for state1 in states:
     margin_bottom += values
 
 fig.tight_layout()
-plt.savefig('Nowakowski_ccAF_plot_Refined.pdf')
+plt.savefig('results/Nowakowski_ccAF_plot_Refined.pdf')
 plt.clf()
 
