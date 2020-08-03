@@ -45,6 +45,7 @@ mkdir data
     - [geneConversions.zip](https://figshare.com/articles/dataset/geneConversions_zip/12751073) (needs to be unzipped) - helpful gene ID conversion files.
     - [forClassification.zip](https://figshare.com/articles/dataset/forClassification_zip/12751079) (needs to be unzipped) - loom data files that were classified using ccAF.
     - [ssGSEA.GBM.classification.zip](https://figshare.com/articles/dataset/ssGSEA_GBM_classification_zip/12751076) (needs to be unzipped) - subtype classification results for all glioma datasets.
+    - [Whitfield.zip](https://figshare.com/articles/dataset/Whitfield_zip/12751070) (needs to be unzipped) - Whitfield et al., 2002 gold-standard dataset for validation of S & M phases.
     - [cellcycle_int_integrated.loom](https://figshare.com/articles/dataset/cellcycle_int_integrated_loom/12751055) (does not need to be unzipped) - U5 hNSC data as a loom file that was used to build the ccAF classifier.
 ```shell
 wget https://figshare.com/articles/dataset/U5_hNSC_zip/12751082
