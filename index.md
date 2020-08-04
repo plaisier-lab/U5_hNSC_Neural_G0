@@ -18,6 +18,7 @@
     7. **[Classify human scRNA-seq datasets](#7-classify-human-scRNA-seq-datasets)**
     8. **[Classify mouse scRNA-seq datasets](#8-classify-mouse-scRNA-seq-datasets)**
     9. **[Classify glioma scRNA-seq datasets](#9-classify-glioma-scRNA-seq-datasets)**
+- **[ccAF classifier](#ccaf-classifier)**
 - **[Contact](#contact)**
 - **[Citation](#citation)**
 
@@ -349,6 +350,27 @@ root@ef02b3a45938:/files/U5_hNSC_Neural_G0# python3 classifyPrimaryCells_gliomas
 This script will output two files for each study:
 - **results/ccAF_results_\*.csv** - a table where the cells are rows and the columns are meta-information about the cells and 'Predictions', which are the predicted ccAF labels. The asterisk will be replaced with the name of the study:  GSE70630, GSE89567, GSE854465_all, GSE131928_10X, GSE131928_Smartseq2, Bhaduri, GSE139448, GSE102130.
 - **results/table1_\*.csv** - a confusion matrix of counts for each study. The asterisk will be replaced with the name of the study:  GSE70630, GSE89567, GSE854465_all, GSE131928_10X, GSE131928_Smartseq2, Bhaduri, GSE139448, GSE102130.
+
+### ccAF classifier
+The ccAF classifier is currently available for download and isntall as either:
+1. [PyPi Python package](https://pypi.org/project/ccAF/1.0.1/):
+    - Install using:
+    ```console
+    pip install ccAF
+    ```
+2. [Docker container](https://hub.docker.com/r/cplaisier/ccaf):
+    - Pull using:
+    
+    ```console
+    docker pull cplaisier/ccaf
+    ```
+    
+    -Run using:
+    
+    ```console
+    docker run -it -v '<path to files to classify>:/files' cplaisier/ccaf
+    ```
+More detailed instructions on using the ccAF classifier can be found with the github repository:  [https://github.com/plaisier-lab/ccAF](https://github.com/plaisier-lab/ccAF)
 
 ### Contact
 For issues or comments please contact:  [Samantha O'Connor](saoconn1@asu.edu) or [Chris Plaisier](mailto:plaisier@asu.edu)
