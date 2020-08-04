@@ -11,7 +11,7 @@
 - **[Analyses](#Analyses)**
     1. **[Identification of cell cycle phases](#1-identification-of-cell-cycle-phases)**
     2. **[Resolving the flow of cells through the cell cycle using RNA velocity](#2-resolving-the-flow-of-cells-through-the-cell-cycle-using-rna-velocity)**
-    3. **[Pepare data for building classifier](#3-pepare-data-for-building-classifier)**
+    3. **[Prepare data for building classifier](#3-prepare-data-for-building-classifier)**
     4. **[Build classifier: 100-fold cross-validation](#4-build-classifier-100-fold-cross-validation)**
     5. **[Sensitivity analysis](#5-sensitivity-analysis)**
     6. **[Whitfield et al., 2002 gold-standard classification](#6-whitfield-et-al-2002-gold-standard-classification)**
@@ -165,7 +165,7 @@ mkdir results
 ```
 
 ### Docker container
-We facilitate the use of our code and data by providing a Docker Hub container [cplaisier/scrna_seq_velocity](https://hub.docker.com/r/cplaisier/scrna_seq_velocity) which has all the dependencies and libraries to run the scripts. To see how the Docker container is configured plaese refer to the [Dockerfile](https://github.com/plaisier-lab/docker_scRNA_seq_velocity/blob/master/Dockerfile). Please [install Docker](https://docs.docker.com/get-docker/) and then from the command line run:
+We facilitate the use of our code and data by providing a Docker Hub container [cplaisier/scrna_seq_velocity](https://hub.docker.com/r/cplaisier/scrna_seq_velocity) which has all the dependencies and libraries to run the scripts. To see how the Docker container is configured please refer to the [Dockerfile](https://github.com/plaisier-lab/docker_scRNA_seq_velocity/blob/master/Dockerfile). Please [install Docker](https://docs.docker.com/get-docker/) and then from the command line run:
 ```shell
 docker pull cplaisier/scrna_seq_velocity
 ```
@@ -205,7 +205,7 @@ This script will output:
 - Three hypergeometric p-values for overlaps with YAP target genes which are printed out to the console.
 
 #### 2. Resolving the flow of cells through the cell cycle using RNA velocity 
-We added directionality to the edges using RNA velocity which computes the ratio of unspliced to spliced transcripts and infers the likely trajectory of cells through a two-dimensional single cell embedding, e.g. tSNE. The RNA velocity trajectories delineate the cell cycle in the expected orientation. First, we use velocy to realign the transcriptome and tabulate spliced and unspliced transcript counts for each gene (we provide the result of this and not the raw data and genome build from 10X are very large [genome build used from cellranger](https://support.10xgenomics.com/single-cell-gene-expression/software/release-notes/build#hg19_3.0.0)):
+We added directionality to the edges using RNA velocity which computes the ratio of unspliced to spliced transcripts and infers the likely trajectory of cells through a two-dimensional single cell embedding, e.g. tSNE. The RNA velocity trajectories delineate the cell cycle in the expected orientation. First, we use velocyto to realign the transcriptome and tabulate spliced and unspliced transcript counts for each gene (we provide the result of this and not the raw data and genome build from 10X are very large [genome build used from cellranger](https://support.10xgenomics.com/single-cell-gene-expression/software/release-notes/build#hg19_3.0.0)):
 
 ```console
 root@ef02b3a45938:/files/U5_hNSC_Neural_G0# velocyto run10x -m hg19_rmsk.gtf WT genes.gtf
@@ -223,15 +223,15 @@ root@ef02b3a45938:/files/U5_hNSC_Neural_G0# python3 scvelo_analysis.py
 This script will output:
 - **results/ccAdata_velocity_stream_tsne.png** - tSNE embeddings with RNA velocity stream lines.
 
-#### 3. Pepare data for building classifier
-We faciliatate further analysis in Python by converting the WT U5 hNSC data into a loom file:
+#### 3. Prepare data for building classifier
+We facilitate further analysis in Python by converting the WT U5 hNSC data into a loom file:
 
 ```console
 root@ef02b3a45938:/files/U5_hNSC_Neural_G0# Rscript converting_to_loom.R
 ```
 
 This script will output:
-- **results/highlyVarGenes_WT_sgTAOK1_1584.csv** - list of the overlapping top 2,000 highly varaiable genes from UT and sgTAOK1.
+- **results/highlyVarGenes_WT_sgTAOK1_1584.csv** - list of the overlapping top 2,000 highly variable genes from UT and sgTAOK1.
 - **results/cellcycle_int_integrated.loom** - loom file used to construct the ccAF classifier.
 
 #### 4. Build classifier: 100-fold cross-validation
@@ -248,7 +248,7 @@ root@ef02b3a45938:/files/U5_hNSC_Neural_G0# python3 cvClassification_FullAnalysi
 ```
 
 This script will output two files for each method tested:
-- **results/\<method\>/ccAF_CV_results.csv** - The true labels, and predicted labels for the test sets from each cross-valdiation iteration. The \<method\> will be replaced with the name of the method:  SVMrej, RF, KNN, and ACTINN.
+- **results/\<method\>/ccAF_CV_results.csv** - The true labels and predicted labels for the test sets from each cross-validation iteration. The \<method\> will be replaced with the name of the method:  SVMrej, RF, KNN, and ACTINN.
 - **results/\<method\>/CV_classification_report.csv** - Classification reports that have F1 scores and other metrics for classifier quality control. The \<method\> will be replaced with the name of the method:  SVMrej, RF, KNN, and ACTINN.
 
 This script will calculate the errors for each method:
@@ -275,11 +275,11 @@ root@ef02b3a45938:/files/U5_hNSC_Neural_G0# python3 sensitivityAnalysis.py
 ```
 
 This script will output:
-- **results/SensitivityAnalysis/ccAF_CV_sensitivity_analysis.csv** - The true labels, and predicted labels for the test sets from each cross-valdiation iteration.
+- **results/SensitivityAnalysis/ccAF_CV_sensitivity_analysis.csv** - The true labels and predicted labels for the test sets from each cross-validation iteration.
 - **results/SensitivityAnalysis/ccAF_CV_sensitivity_analysis_boxplot.pdf** - Boxplot showing how increasing amounts of missing genes affects the error rate of the ccAF classifier.
 
 #### 6. Whitfield et al., 2002 gold-standard classification
-We validated S and M phase classifications by appling the ccAF classifier to a gold standard cell-cycle synchronized time-series dataset from HeLa cells with simultaneous characterization of transcriptome profiles and experimental determination of whether the cells were in S or M phase at each time point:
+We validated S and M phase classifications by applying the ccAF classifier to a gold standard cell-cycle synchronized time-series dataset from HeLa cells with simultaneous characterization of transcriptome profiles and experimental determination of whether the cells were in S or M phase at each time point:
 > [Whitfield et al., 2002](https://pubmed.ncbi.nlm.nih.gov/12058064/) - gold-standard dataset of 1,134 most cyclic genes was used to validate S & M phases from ccAF (http://genome-www.stanford.edu/Human-CellCycle/HeLa/).
 
 ```console
@@ -287,7 +287,7 @@ root@ef02b3a45938:/files/U5_hNSC_Neural_G0# python3 Whitfield_classification_ACT
 ```
 
 This script will output:
-- **results/Whitfield/ACTINN_results_Whitfield_1134_quantile.csv** - The true labels, and predicted labels for the test sets from each cross-valdiation iteration.
+- **results/Whitfield/ACTINN_results_Whitfield_1134_quantile.csv** - The true labels and predicted labels for the test sets from each cross-validation iteration.
 - **results/Whitfield/ACTINN_classification_report_Whitfield_1134_quantile.csv** - Classification reports that have F1 scores and other metrics for classifier quality control.
 - **results/Whitfield/plots/F1_scores_for_each_state_Whitfield_1134_quantile.pdf** - A boxplot of each classifier method stratified by cell cycle state.
 - **results/Whitfield/plots/F1_scores_for_each_state_Whitfield_1134_quantile_2.pdf** - A boxplot of each cell cycle state stratified by classifier method.
@@ -319,7 +319,7 @@ This script will output two files for each study:
 
 #### 8. Classify mouse scRNA-seq datasets
 We classified two mouse scRNA-seq studies:
-> 1. [Llorens-Bobadilla et al., 2015](https://www.ncbi.nlm.nih.gov/pubmed/26235341) - defined quiescent neural stem cell (qNSC) and active (aNSC) subpopulations from adult mouse subbentricular zone (GSE67833).
+> 1. [Llorens-Bobadilla et al., 2015](https://www.ncbi.nlm.nih.gov/pubmed/26235341) - defined quiescent neural stem cell (qNSC) and active (aNSC) subpopulations from adult mouse subventricular zone (GSE67833).
 > 2. [Dulken et al., 2017](https://www.ncbi.nlm.nih.gov/pubmed/28099854) - perform single cell transcriptomics on neural stem cells (NSCs) from adult mice (PRJNA324289).
 Run this command to classify the cells from these mouse scRNA-seq studies:
 
@@ -352,7 +352,7 @@ This script will output two files for each study:
 - **results/table1_\*.csv** - a confusion matrix of counts for each study. The asterisk will be replaced with the name of the study:  GSE70630, GSE89567, GSE854465_all, GSE131928_10X, GSE131928_Smartseq2, Bhaduri, GSE139448, GSE102130.
 
 ### ccAF classifier
-The ccAF classifier is currently available for download and isntall as either:
+The ccAF classifier is currently available for download, installation, and execution as either:
 1. [PyPi Python package](https://pypi.org/project/ccAF/1.0.1/):
     - Install using:
     ```console
