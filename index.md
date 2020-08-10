@@ -57,7 +57,7 @@ wget https://ndownloader.figshare.com/files/24130970 -O forClassification.zip
 wget https://ndownloader.figshare.com/files/24128375 -O ssGSEA_GBM_classification.zip
 wget https://ndownloader.figshare.com/files/24128369 -O cellcycle_int_integrated.loom
 wget https://ndownloader.figshare.com/files/24130961 -O Whitfield.zip
-unzip U5_hNSC.zip geneConversions.zip forClassification.zip ssGSEA.GBM.classification.zip
+unzip U5_hNSC.zip geneConversions.zip forClassification.zip ssGSEA.GBM.classification.zip Whitfield.zip
 ```
 
 #### Directory structure
