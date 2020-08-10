@@ -39,6 +39,7 @@ git clone https://github.com/plaisier-lab/U5_hNSC_Neural_G0.git
 ```shell
 cd U5_hNSC_Neural_G0
 mkdir data
+cd data
 ```
 3. Download (and unzip for zip files) all files from [figshare](https://figshare.com/projects/Neural_G0_a_quiescent-like_state_found_in_neuroepithelial-derived_cells_and_glioma/86939):
     - [U5_hNSC.zip](https://figshare.com/articles/dataset/U5_hNSC_zip/12751082) (needs to be unzipped) - contains all the U5-hNSC scRNA-seq datasets as output from cellranger.
@@ -49,12 +50,13 @@ mkdir data
     - [Whitfield.zip](https://figshare.com/articles/dataset/Whitfield_zip/12751070) (needs to be unzipped) - Whitfield et al., 2002 gold-standard dataset for validation of S & M phases.
     - [cellcycle_int_integrated.loom](https://figshare.com/articles/dataset/cellcycle_int_integrated_loom/12751055) (does not need to be unzipped) - U5 hNSC data as a loom file that was used to build the ccAF classifier.
 ```shell
-wget https://figshare.com/articles/dataset/U5_hNSC_zip/12751082
+wget https://ndownloader.figshare.com/files/24130952 -O U5_hNSC.zip
 wget https://figshare.com/articles/software/ccAF_1536_smaller_pkl/12751058
-wget https://figshare.com/articles/dataset/geneConversions_zip/12751073
-wget https://figshare.com/articles/dataset/forClassification_zip/12751079
+wget https://ndownloader.figshare.com/files/24130958 -O geneConversions.zip
+wget https://ndownloader.figshare.com/files/24130970 -O forClassification.zip
 wget https://figshare.com/articles/dataset/ssGSEA_GBM_classification_zip/12751076
 wget https://figshare.com/articles/dataset/cellcycle_int_integrated_loom/12751055
+wget https://ndownloader.figshare.com/files/24130961 -O Whitfield.zip
 unzip U5_hNSC.zip geneConversions.zip forClassification.zip ssGSEA.GBM.classification.zip
 ```
 
