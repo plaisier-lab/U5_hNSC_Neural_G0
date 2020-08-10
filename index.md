@@ -51,11 +51,11 @@ cd data
     - [cellcycle_int_integrated.loom](https://figshare.com/articles/dataset/cellcycle_int_integrated_loom/12751055) (does not need to be unzipped) - U5 hNSC data as a loom file that was used to build the ccAF classifier.
 ```shell
 wget https://ndownloader.figshare.com/files/24130952 -O U5_hNSC.zip
-wget https://figshare.com/articles/software/ccAF_1536_smaller_pkl/12751058
+wget https://ndownloader.figshare.com/files/24128372 -O ccAF_1536_smaller.pkl
 wget https://ndownloader.figshare.com/files/24130958 -O geneConversions.zip
 wget https://ndownloader.figshare.com/files/24130970 -O forClassification.zip
-wget https://figshare.com/articles/dataset/ssGSEA_GBM_classification_zip/12751076
-wget https://figshare.com/articles/dataset/cellcycle_int_integrated_loom/12751055
+wget https://ndownloader.figshare.com/files/24128375 -O ssGSEA_GBM_classification.zip
+wget https://ndownloader.figshare.com/files/24128369 -O cellcycle_int_integrated.loom
 wget https://ndownloader.figshare.com/files/24130961 -O Whitfield.zip
 unzip U5_hNSC.zip geneConversions.zip forClassification.zip ssGSEA.GBM.classification.zip
 ```
@@ -375,7 +375,7 @@ The ccAF classifier is currently available for download, installation, and execu
 More detailed instructions on using the ccAF classifier can be found with the github repository:  [https://github.com/plaisier-lab/ccAF](https://github.com/plaisier-lab/ccAF)
 
 ### Contact
-For issues or comments please contact:  [Samantha O'Connor](saoconn1@asu.edu) or [Chris Plaisier](mailto:plaisier@asu.edu)
+For issues or comments please contact:  [Samantha O'Connor](mailto:saoconn1@asu.edu) or [Chris Plaisier](mailto:plaisier@asu.edu)
 
 ### Citation
 [Neural G0: a quiescent-like state found in neuroepithelial-derived cells and glioma.](https://doi.org/10.1101/446344) Samantha A. O'Connor, Heather M. Feldman, Chad M. Toledo, Sonali Arora, Pia Hoellerbauer, Philip Corrin, Lucas Carter, Megan Kufeld, Hamid Bolouri, Ryan Basom, Jeffrey Delrow, José L. McFaline-Figueroa, Cole Trapnell, Steven M. Pollard, Anoop Patel, Patrick J. Paddison, Christopher L. Plaisier. bioRxiv 446344; doi: [https://doi.org/10.1101/446344](https://doi.org/10.1101/446344) 
