@@ -5,7 +5,7 @@
 ### Table of Contents
 - **[Abstract](#abstract)**
 - **[Data and code availability](#data-and-code-availability)**
-- **[Instructions to setup data and code for recreating analyses](#instructions-to-setup-data-and-code-for-recreating-analyses)**
+- **[Instructions to set up data and code for recreating analyses](#instructions-to-setup-data-and-code-for-recreating-analyses)**
     - **[Directory structure](#directory-structure)**
 - **[Docker container](#docker-container)**
 - **[Analyses](#Analyses)**
@@ -23,14 +23,14 @@
 - **[Citation](#citation)**
 
 ### Abstract
-In depth knowledge of the cellular states associated with normal and disease tissue homeostasis is critical for understanding disease etiology and uncovering therapeutic opportunities. Here, we used single cell RNA-seq to survey the cellular states of neuroepithelial-derived cells in cortical and neurogenic regions of developing and adult mammalian brain to compare with 38,474 cells obtained from 59 human gliomas, as well as pluripotent ESCs, endothelial cells, CD45+ immune cells, and non-CNS cancers. This analysis suggests that a significant portion of neuroepithelial-derived stem and progenitor cells and glioma cells that are not in G2/M or S phase exist in two states: G1 or Neural G0, defined by expression of certain neuro-developmental genes. In gliomas, higher overall Neural G0 gene expression is significantly associated with less aggressive gliomas, IDH1 mutation, and extended patient survival, while also anti-correlated with cell cycle gene expression. Knockout of genes associated with the Hippo/Yap and p53 pathways diminished Neural G0 in vitro, resulting in faster G1 transit, down regulation of quiescence-associated markers, and loss of Neural G0 gene expression. Thus, Neural G0 is a dynamic cellular state required for indolent cell cycles in neural-specified stem and progenitors poised for cell division. As a result, Neural G0 occupancy may be an important determinant of glioma tumor progression.
+In depth knowledge of the cellular states associated with normal and disease tissue homeostasis is critical for understanding disease etiology and uncovering therapeutic opportunities. Here, we used single cell RNA-seq to survey the cellular states of neuroepithelial-derived cells in cortical and neurogenic regions of developing and adult mammalian brain to compare with 38,474 cells obtained from 59 human gliomas, as well as pluripotent ESCs, endothelial cells, CD45+ immune cells, and non-CNS cancers. This analysis suggests that a significant portion of neuroepithelial-derived stem and progenitor cells and glioma cells that are not in G2/M or S phase exist in two states: G1 or Neural G0, defined by expression of certain neuro-developmental genes. In gliomas, higher overall Neural G0 gene expression is significantly associated with less aggressive gliomas, IDH1 mutation, and extended patient survival, while also anti-correlated with cell cycle gene expression. Knockout of genes associated with the Hippo/Yap and p53 pathways diminished Neural G0 in vitro, resulting in faster G1 transit, down-regulation of quiescence-associated markers, and loss of Neural G0 gene expression. Thus, Neural G0 is a dynamic cellular state required for indolent cell cycles in neural-specified stem and progenitors poised for cell division. As a result, Neural G0 occupancy may be an important determinant of glioma tumor progression.
 
 ### Data and code availability
-- All datafiles need to run this code can be found on [figshare](https://figshare.com/projects/Neural_G0_a_quiescent-like_state_found_in_neuroepithelial-derived_cells_and_glioma/86939).
+- All datafiles needed to run this code can be found on [figshare](https://figshare.com/projects/Neural_G0_a_quiescent-like_state_found_in_neuroepithelial-derived_cells_and_glioma/86939).
 - The analysis software and scripts are available on [github](https://github.com/plaisier-lab/U5_hNSC_Neural_G0/).
 
 ### Instructions to setup data and code for recreating analyses
-In order to run the software and scripts you will need to setup a specific directory structure and download all the data and scripts. Here are the instructions to setup things up:
+In order to run the software and scripts you will need to set up a specific directory structure and download all of the data and scripts. Here are the instructions to set things up:
 1. Clone the [U5_hNSC_Neural_G0 repository](https://github.com/plaisier-lab/U5_hNSC_Neural_G0/)
 ```shell
 git clone https://github.com/plaisier-lab/U5_hNSC_Neural_G0.git
@@ -61,7 +61,7 @@ unzip U5_hNSC.zip geneConversions.zip forClassification.zip ssGSEA.GBM.classific
 ```
 
 #### Directory structure
-After downloading and unzipping the files the directory structure should look like this:
+After downloading and unzipping the files, the directory structure should look like this:
 
 ```
 .
@@ -161,13 +161,13 @@ After downloading and unzipping the files the directory structure should look li
 |   +-- Whitfield_classification_ACTINN_analysis.py
 ```
 
-Now make a results directory to hold the output from analysis scripts:
+Now, make a results directory to hold the output from analysis scripts:
 ```shell
 mkdir results
 ```
 
 ### Docker container
-We facilitate the use of our code and data by providing a Docker Hub container [cplaisier/scrna_seq_velocity](https://hub.docker.com/r/cplaisier/scrna_seq_velocity) which has all the dependencies and libraries to run the scripts. To see how the Docker container is configured please refer to the [Dockerfile](https://github.com/plaisier-lab/docker_scRNA_seq_velocity/blob/master/Dockerfile). Please [install Docker](https://docs.docker.com/get-docker/) and then from the command line run:
+We facilitate the use of our code and data by providing a Docker Hub container [cplaisier/scrna_seq_velocity](https://hub.docker.com/r/cplaisier/scrna_seq_velocity), which has all the dependencies and libraries to run the scripts. To see how the Docker container is configured, please refer to the [Dockerfile](https://github.com/plaisier-lab/docker_scRNA_seq_velocity/blob/master/Dockerfile). Please [install Docker](https://docs.docker.com/get-docker/) and then from the command line, run:
 ```shell
 docker pull cplaisier/scrna_seq_velocity
 ```
@@ -180,20 +180,20 @@ This will start the Docker container in interactive mode and will leave you at a
 root@ef02b3a45938:/tmp/samtools-1.10# cd /files/U5_hNSC_Neural_G0
 root@ef02b3a45938:/files/U5_hNSC_Neural_G0# 
 ```
-If you are able to change to the 'U5_hNSC_Neual_G0 directory' you should be ready to move on to the **Analyses** below.
+If you are able to change to the 'U5_hNSC_Neural_G0 directory' you should be ready to move on to the **Analyses** below.
 
 ### Analyses
 The order of analyses in this study and the details of each analysis are described below:
 
 #### 1. Identification of cell cycle phases
-> **NOTE!** This code requires an extra installation step to revert the R package Seurat to V2.3.4. To install Seurat V2.3.4 please run the following command:
+> **NOTE!** This code requires an extra installation step to revert the R package Seurat to V2.3.4. To install Seurat V2.3.4, please run the following command:
 > ```console
 > root@ef02b3a45938:/files/U5_hNSC_Neural_G0# R
 > > source("https://z.umn.edu/archived-seurat")
 > ```
-> Once this portion of the analysis is completed please close the Docker instance by typing 'exit' into the console until you return to your base operating system. Then restart the Docker instance as described above.
+> Once this portion of the analysis is completed, please close the Docker instance by typing 'exit' into the console until you return to your base operating system. Then restart the Docker instance as described above.
 
-Using scRNA-seq we profiled 5,973 actively dividing U5-hNSCs (Bressan et al, 2017) to identify the single-cell gene expression states corresponding to cell cycle phases with a focus on G0/G1 subpopulations. This will take in the scRNA-seq data from the 'data/U5_hNSC' directory where the 10X cellranger outputs for the U5-hNSCs are stored.
+Using scRNA-seq we profiled 5,973 actively dividing U5-hNSCs (Bressan et al, 2017) to identify the single-cell gene expression states corresponding to the cell cycle phases with a focus on G0/G1 subpopulations. This will take in the scRNA-seq data from the 'data/U5_hNSC' directory where the 10X cellranger outputs for the U5-hNSCs are stored.
 
 ```console
 root@ef02b3a45938:/files/U5_hNSC_Neural_G0# Rscript U5_hNSC_scRNA_seq_Analysis.R
@@ -207,7 +207,7 @@ This script will output:
 - Three hypergeometric p-values for overlaps with YAP target genes which are printed out to the console.
 
 #### 2. Resolving the flow of cells through the cell cycle using RNA velocity 
-We added directionality to the edges using RNA velocity which computes the ratio of unspliced to spliced transcripts and infers the likely trajectory of cells through a two-dimensional single cell embedding, e.g. tSNE. The RNA velocity trajectories delineate the cell cycle in the expected orientation. First, we use velocyto to realign the transcriptome and tabulate spliced and unspliced transcript counts for each gene (we provide the result of this and not the raw data and genome build from 10X are very large [genome build used from cellranger](https://support.10xgenomics.com/single-cell-gene-expression/software/release-notes/build#hg19_3.0.0)):
+We added directionality to the edges using RNA velocity which computes the ratio of unspliced to spliced transcripts and infers the likely trajectory of cells through a two-dimensional single cell embedding, e.g. tSNE. The RNA velocity trajectories delineate the cell cycle in the expected orientation. First, we use velocyto to realign the transcriptome and tabulate spliced and unspliced transcript counts for each gene (we provide the result of this and not the raw data; the genome build from 10X is very large [genome build used from cellranger](https://support.10xgenomics.com/single-cell-gene-expression/software/release-notes/build#hg19_3.0.0)):
 
 ```console
 root@ef02b3a45938:/files/U5_hNSC_Neural_G0# velocyto run10x -m hg19_rmsk.gtf WT genes.gtf
@@ -226,7 +226,7 @@ This script will output:
 - **results/ccAdata_velocity_stream_tsne.png** - tSNE embeddings with RNA velocity stream lines.
 
 #### 3. Prepare data for building classifier
-We facilitate further analysis in Python by converting the WT U5 hNSC data into a loom file:
+We facilitate further analysis in Python by converting the WT U5-hNSC data into a loom file:
 
 ```console
 root@ef02b3a45938:/files/U5_hNSC_Neural_G0# Rscript converting_to_loom.R
@@ -270,7 +270,7 @@ This script will output:
 - **results/CV_plots/F1_scores_for_each_state_per_classifier_1536_2.pdf** - A boxplot of each cell cycle state stratified by classifier method.
 
 #### 5. Sensitivity analysis
-A major issue in scRNA-seq studies is that the number of genes detected is heavily dependent upon sequencing depth, and missing gene information is a commonplace in scRNA-seq studies. Therefore we conducted a sensitivity analysis to determine the effect of randomly removing an increasing percentage of genes.
+A major issue in scRNA-seq studies is that the number of genes detected is heavily dependent upon sequencing depth and missing gene information is commonplace in scRNA-seq studies. Therefore, we conducted a sensitivity analysis to determine the effect of randomly removing an increasing percentage of genes.
 
 ```console
 root@ef02b3a45938:/files/U5_hNSC_Neural_G0# python3 sensitivityAnalysis.py
@@ -293,7 +293,7 @@ This script will output:
 - **results/Whitfield/ACTINN_classification_report_Whitfield_1134_quantile.csv** - Classification reports that have F1 scores and other metrics for classifier quality control.
 - **results/Whitfield/plots/F1_scores_for_each_state_Whitfield_1134_quantile.pdf** - A boxplot of each classifier method stratified by cell cycle state.
 - **results/Whitfield/plots/F1_scores_for_each_state_Whitfield_1134_quantile_2.pdf** - A boxplot of each cell cycle state stratified by classifier method.
-- **results/Whitfield/plots/heatmapsOfWhitfield_1134_quantile.csv** - Recreating figure 2 from Whitfield et al., 2002 with ccAF cell cycle phase classification.
+- **results/Whitfield/plots/heatmapsOfWhitfield_1134_quantile.csv** - Recreating Figure 2 from Whitfield et al., 2002 with ccAF cell cycle phase classification.
 
 #### 7. Classify human scRNA-seq datasets
 We classified three human scRNA-seq studies:
@@ -307,10 +307,10 @@ root@ef02b3a45938:/files/U5_hNSC_Neural_G0# python3 classifyPrimaryCells_homoSap
 ```
 
 This script will output two files for each study:
-- **results/ccAF_results_\*.csv** - a table where the cells are rows and the columns are meta-information about the cells and 'Predictions', which are the predicted ccAF labels. The asterisk will be replaced with the name of the study:  Nowakowski_norm, HEK293T, and GSE103322.
-- **results/table1_\*.csv** - a confusion matrix of counts for each study. The asterisk will be replaced with the name of the study:  Nowakowski_norm, HEK293T, and GSE103322.
+- **results/ccAF_results_\*.csv** - a table where the cells are rows and the columns are meta-information about the cells. 'Predictions' are the predicted ccAF labels. The asterisk will be replaced with the name of the study: Nowakowski_norm, HEK293T, and GSE103322.
+- **results/table1_\*.csv** - a confusion matrix of counts for each study. The asterisk will be replaced with the name of the study: Nowakowski_norm, HEK293T, and GSE103322.
 
-The Nowakowski et al., 2017 results were then plotted to be added to figure 2:
+The Nowakowski et al., 2017 results were then plotted to be added to Figure 2:
 
 ```console
 root@ef02b3a45938:/files/U5_hNSC_Neural_G0# python3 plotNowakowski.py
@@ -330,8 +330,8 @@ root@ef02b3a45938:/files/U5_hNSC_Neural_G0# python3 classifyPrimaryCells_musMusc
 ```
 
 This script will output two files for each study:
-- **results/ccAF_results_\*.csv** - a table where the cells are rows and the columns are meta-information about the cells and 'Predictions', which are the predicted ccAF labels. The asterisk will be replaced with the name of the study:  GSE67833 and PRJNA324289.
-- **results/table1_\*.csv** - a confusion matrix of counts for each study. The asterisk will be replaced with the name of the study:  GSE67833 and PRJNA324289.
+- **results/ccAF_results_\*.csv** - a table where the cells are rows and the columns are meta-information about the cells. 'Predictions' are the predicted ccAF labels. The asterisk will be replaced with the name of the study: GSE67833 and PRJNA324289.
+- **results/table1_\*.csv** - a confusion matrix of counts for each study. The asterisk will be replaced with the name of the study: GSE67833 and PRJNA324289.
 
 #### 9. Classify glioma scRNA-seq datasets
 We classified seven human scRNA-seq studies:
@@ -350,8 +350,8 @@ root@ef02b3a45938:/files/U5_hNSC_Neural_G0# python3 classifyPrimaryCells_gliomas
 ```
 
 This script will output two files for each study:
-- **results/ccAF_results_\*.csv** - a table where the cells are rows and the columns are meta-information about the cells and 'Predictions', which are the predicted ccAF labels. The asterisk will be replaced with the name of the study:  GSE70630, GSE89567, GSE854465_all, GSE131928_10X, GSE131928_Smartseq2, Bhaduri, GSE139448, GSE102130.
-- **results/table1_\*.csv** - a confusion matrix of counts for each study. The asterisk will be replaced with the name of the study:  GSE70630, GSE89567, GSE854465_all, GSE131928_10X, GSE131928_Smartseq2, Bhaduri, GSE139448, GSE102130.
+- **results/ccAF_results_\*.csv** - a table where the cells are rows and the columns are meta-information about the cells. 'Predictions' are the predicted ccAF labels. The asterisk will be replaced with the name of the study: GSE70630, GSE89567, GSE854465_all, GSE131928_10X, GSE131928_Smartseq2, Bhaduri, GSE139448, GSE102130.
+- **results/table1_\*.csv** - a confusion matrix of counts for each study. The asterisk will be replaced with the name of the study: GSE70630, GSE89567, GSE854465_all, GSE131928_10X, GSE131928_Smartseq2, Bhaduri, GSE139448, GSE102130.
 
 ### ccAF classifier
 The ccAF classifier is currently available for download, installation, and execution as either:
